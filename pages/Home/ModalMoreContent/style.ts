@@ -4,10 +4,11 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 export const Container = styled.View`
     padding: 4%;
-    padding-bottom: 84.8%;
+    padding-bottom: 59.8%;
 `
 
 export const Title = styled.Text`
+    margin-bottom: 2%;
     font-weight: bold;
     align-self: center;
     font-size: ${RFPercentage(4)}px;
@@ -16,7 +17,7 @@ export const Title = styled.Text`
 
 export const Option = styled.TouchableOpacity`
     padding: 4%;
-    margin-top: 5%;
+    margin-top: 8%;
     align-self: center;
     flex-direction: row;
     border-radius: ${RFPercentage(2)}px;

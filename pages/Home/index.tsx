@@ -3,7 +3,7 @@ import { Iart } from '../../types'
 import getArts from './getArts'
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
-import { FlatList, ListRenderItemInfo } from 'react-native'
+import { FlatList, ListRenderItemInfo, RefreshControl } from 'react-native'
 import Header from './Header'
 import { Modalize } from 'react-native-modalize'
 import { RFPercentage } from 'react-native-responsive-fontsize'
@@ -16,6 +16,7 @@ export default function Home() {
   const [artSelect, setArtSelect] = useState<Iart>(null)
   const modalFooter = useRef<Modalize>(null)
   const modalMore = useRef<Modalize>(null)
+  const [refreshing, setRefreshing] = useState(false)
   const theme = useTheme()
   
   useEffect(() => {
@@ -37,6 +38,14 @@ export default function Home() {
       />
     )
   }
+
+  async function onRefreshAction() {
+    setRefreshing(true)
+
+    await getArts(setArts)
+
+    setRefreshing(false)
+  }
   
   return (
     <ContainerPd>
@@ -45,6 +54,15 @@ export default function Home() {
         renderItem={RenderArt}
         ListHeaderComponent={Header}
         keyExtractor={(item: Iart) => item._id}
+        refreshControl={(
+          <RefreshControl
+            refreshing={refreshing}
+            colors={[theme.primary]}
+            onRefresh={onRefreshAction}
+            progressViewOffset={RFPercentage(18)}
+            progressBackgroundColor={theme.secondary}
+          />
+        )}
       />
       <Modalize ref={modalFooter} modalHeight={RFPercentage(50)} modalStyle={{backgroundColor: theme.backgroundColor}}>
         <ModalFooterContent art={artSelect}/>
