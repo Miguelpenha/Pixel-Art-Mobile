@@ -5,6 +5,7 @@ import * as FileSystem from 'expo-file-system'
 import * as MediaLibrary from 'expo-media-library'
 import { Modalize } from 'react-native-modalize'
 import * as Sharing from 'expo-sharing'
+import * as Clipboard from 'expo-clipboard'
 
 interface Iprops {
     art: Iart
@@ -41,10 +42,20 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
             UTI: 'public.png'
         })
     }
+
+    function copyLink() {
+        Clipboard.setString(`https://pixel-arte.vercel.app/arts/${art._id}`)
+        
+        modalRef.current.close()
+    }
     
     return (
         <Container>
             <Title>Opções</Title>
+            <Option onPress={copyLink}>
+                <IconOption name="link" size={28}/>
+                <TextOption>Link</TextOption>
+            </Option>
             <Option onPress={download}>
                 <IconOption name="file-download" size={28}/>
                 <TextOption>Baixar</TextOption>

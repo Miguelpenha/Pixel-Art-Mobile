@@ -39,7 +39,8 @@
     "styled-components": "^5.3.5",
     "expo-file-system": "~13.1.4",
     "expo-media-library": "~14.0.0",
-    "expo-sharing": "~10.1.0"
+    "expo-sharing": "~10.1.0",
+    "expo-clipboard": "~2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
