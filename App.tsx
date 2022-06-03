@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 import { getThemeFunction } from './utils/getTheme'
+import updateApp from './utils/updateApp'
 import 'react-native-gesture-handler'
 
 type IthemeType = 'light' | 'dark'
@@ -20,8 +21,13 @@ function App() {
   
   useEffect(() => {
     getThemeFunction(setTheme).then()
-    setPronto(true)
   }, [theme])
+
+  useEffect(() => {
+    getThemeFunction(setTheme).then()
+    updateApp().then()
+    setPronto(true)
+  }, [])
   
   if (!pronto) {
     return <AppLoading/>
