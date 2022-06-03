@@ -1,11 +1,12 @@
 import { Iart } from '../../../types'
 import { FC, MutableRefObject } from 'react'
-import { Container, Title, Option, IconOption, TextOption } from './style'
-import * as FileSystem from 'expo-file-system'
-import * as MediaLibrary from 'expo-media-library'
+import { Container, Title, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
+import { TouchableOpacity } from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
+import * as FileSystem from 'expo-file-system'
+import * as MediaLibrary from 'expo-media-library'
 
 interface Iprops {
     art: Iart
@@ -48,17 +49,43 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         
         modalRef.current.close()
     }
+
+    function copyImageLink() {
+        Clipboard.setString(`https://pixel-arte.vercel.app/api/arts/find/${art._id}/image`)
+        
+        modalRef.current.close()
+    }
+
+    function favorite() {
+        modalRef.current.close()
+    }
     
     return (
         <Container>
             <Title>Opções</Title>
-            <Option onPress={copyLink}>
-                <IconOption name="link" size={28}/>
-                <TextOption>Link</TextOption>
-            </Option>
-            <Option onPress={download}>
-                <IconOption name="file-download" size={28}/>
-                <TextOption>Baixar</TextOption>
+            <MainOptions>
+                <TouchableOpacity onPress={copyLink}>
+                    <ContainerIconOptionMain>
+                        <IconOptionMain name="link" size={32}/>
+                    </ContainerIconOptionMain>  
+                    <TextOptionMain>Link</TextOptionMain>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={download}>
+                    <ContainerIconOptionMain>
+                        <IconOptionMain name="file-download" size={32}/>
+                    </ContainerIconOptionMain>  
+                    <TextOptionMain>Baixar</TextOptionMain>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={favorite}>
+                    <ContainerIconOptionMain>
+                        <IconOptionMain name="star" size={32}/>
+                    </ContainerIconOptionMain>  
+                    <TextOptionMain>Favoritos</TextOptionMain>
+                </TouchableOpacity>
+            </MainOptions>
+            <Option onPress={copyImageLink}>
+                <IconOption name="image" size={28}/>
+                <TextOption>Link da foto</TextOption>
             </Option>
             <Option onPress={share}>
                 <IconOption name="share" size={28}/>

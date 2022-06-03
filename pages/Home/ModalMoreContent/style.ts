@@ -4,15 +4,42 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 export const Container = styled.View`
     padding: 4%;
-    padding-bottom: 59.8%;
+    padding-bottom: ${RFPercentage(16)}px;
 `
 
 export const Title = styled.Text`
-    margin-bottom: 2%;
+    margin-bottom: 8%;
     font-weight: bold;
     align-self: center;
     font-size: ${RFPercentage(4)}px;
     color: ${props => props.theme.primary};
+`
+
+export const MainOptions = styled.View`
+    padding-bottom: 2%;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom-width: ${RFPercentage(0.5)}px;
+    border-bottom-color: ${props => props.theme.secondaryColor};
+`
+
+export const ContainerIconOptionMain = styled.View`
+    align-self: center;
+    border-radius: ${RFPercentage(6)}px;
+    border: ${RFPercentage(0.4)}px solid ${props => props.theme.secondaryColor}; 
+`
+
+export const IconOptionMain = styled(MaterialIcons)`
+    padding: 2%;
+    color: ${props => props.theme.secondaryColor};
+`
+
+export const TextOptionMain = styled.Text`
+    margin-top: 5%;
+    font-weight: bold;
+    text-align: center;
+    font-size: ${RFPercentage(2.8)}px;
+    color: ${props => props.theme.secondaryColor};
 `
 
 export const Option = styled.TouchableOpacity`
@@ -25,9 +52,9 @@ export const Option = styled.TouchableOpacity`
 `
 
 export const IconOption = styled(MaterialIcons)`
-    align-self: center;
     padding-right: 2%;
     margin-right: auto;
+    align-self: center;
     color: ${props => props.theme.color};
 `
 
