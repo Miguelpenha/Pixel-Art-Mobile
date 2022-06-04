@@ -11,6 +11,7 @@ import Settings from './pages/Settings'
 import { getThemeFunction } from './utils/getTheme'
 import updateApp from './utils/updateApp'
 import 'react-native-gesture-handler'
+import Toast from 'react-native-toast-message'
 
 type IthemeType = 'light' | 'dark'
 
@@ -74,6 +75,7 @@ function App() {
             </Screen>
           </Navigator>
         </NavigationContainer>
+        <Toast/>
       </ThemeProvider>
     )
   }

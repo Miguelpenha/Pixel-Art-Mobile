@@ -1,12 +1,13 @@
 import { Iart } from '../../../types'
 import { FC, MutableRefObject } from 'react'
-import { Container, Title, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
+import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
 import { TouchableOpacity } from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
 import * as FileSystem from 'expo-file-system'
 import * as MediaLibrary from 'expo-media-library'
+import Toast from 'react-native-toast-message'
 
 interface Iprops {
     art: Iart
@@ -27,6 +28,11 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         )
         
         await MediaLibrary.createAssetAsync(uri)
+
+        Toast.show({
+            type: 'success',
+            text1: 'Arte baixada com sucesso'
+        })
     }
 
     async function share() {
@@ -48,37 +54,51 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         Clipboard.setString(`https://pixel-arte.vercel.app/arts/${art._id}`)
         
         modalRef.current.close()
+
+        Toast.show({
+            type: 'success',
+            text1: 'Link copiado com sucesso'
+        })
     }
 
     function copyImageLink() {
         Clipboard.setString(`https://pixel-arte.vercel.app/api/arts/find/${art._id}/image`)
         
         modalRef.current.close()
+
+        Toast.show({
+            type: 'success',
+            text1: 'Link da foto copiado com sucesso'
+        })
     }
 
     function favorite() {
         modalRef.current.close()
+
+        Toast.show({
+            type: 'success',
+            text1: 'Arte salva com favorita'
+        })
     }
     
     return (
         <Container>
-            <Title>Opções</Title>
             <MainOptions>
                 <TouchableOpacity onPress={copyLink}>
                     <ContainerIconOptionMain>
-                        <IconOptionMain name="link" size={32}/>
+                        <IconOptionMain name="link" size={30}/>
                     </ContainerIconOptionMain>  
                     <TextOptionMain>Link</TextOptionMain>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={download}>
                     <ContainerIconOptionMain>
-                        <IconOptionMain name="file-download" size={32}/>
+                        <IconOptionMain name="file-download" size={30}/>
                     </ContainerIconOptionMain>  
                     <TextOptionMain>Baixar</TextOptionMain>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={favorite}>
                     <ContainerIconOptionMain>
-                        <IconOptionMain name="star" size={32}/>
+                        <IconOptionMain name="star" size={30}/>
                     </ContainerIconOptionMain>  
                     <TextOptionMain>Favoritos</TextOptionMain>
                 </TouchableOpacity>

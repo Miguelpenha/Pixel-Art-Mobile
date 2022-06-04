@@ -1,7 +1,8 @@
-import { FC, memo } from 'react'
+import { FC, memo, useState } from 'react'
 import { Iart } from '../../../types'
+import { useTheme } from 'styled-components'
 import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
-import { Container, Header, ContainerName, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfo, IconInfo, TextInfo } from './style'
+import { Container, Header, ContainerName, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
 
 interface Iprops {
     art: Iart
@@ -13,6 +14,10 @@ interface Iprops {
 }
 
 const Art: FC<Iprops> = ({ art, onClickFooter, onClickMore, nameStyle, imageStyle, ...props }) => {
+    const [like, setLike] = useState(false)
+    const [viewLast, setViewLast] = useState(false)
+    const theme = useTheme()
+
     return (
         <Container {...props}>
             <Header>
@@ -29,15 +34,23 @@ const Art: FC<Iprops> = ({ art, onClickFooter, onClickMore, nameStyle, imageStyl
                     uri: art.url
                 }}
             />
-            <Footer onPress={() => onClickFooter()}>
-                <ContainerInfo>
-                    <IconInfo name="straighten" size={28}/>
-                    <TextInfo>{art.sizePixel}</TextInfo>
-                </ContainerInfo>
-                <ContainerInfo>
-                    <IconInfo name="aspect-ratio" size={28}/>
-                    <TextInfo>{art.pixelsCont} ({Math.sqrt(art.pixelsCont)}x{Math.sqrt(art.pixelsCont)})</TextInfo>
-                </ContainerInfo>
+            <Footer>
+                <ContainerInfoButton onPress={() => setLike(!like)}>
+                    <IconInfoLike select={like} mainColor={theme.primary} secondaryColor={theme.secondaryColor} name={`favorite${like ? '' : '-outline'}`} size={28}/>
+                </ContainerInfoButton>
+                <ContainerInfoButton onPress={() => setViewLast(!viewLast)}>
+                    <IconInfoLike select={viewLast} mainColor={theme.check} secondaryColor={theme.secondaryColor} name={`bookmark${viewLast ? '' : '-outline'}`} size={28}/>
+                </ContainerInfoButton>
+                <ListContainerInfo onPress={() => onClickFooter()}>
+                    <ContainerInfo>
+                        <IconInfo name="straighten" size={28}/>
+                        <TextInfo>{art.sizePixel}</TextInfo>
+                    </ContainerInfo>
+                    <ContainerInfo>
+                        <IconInfo name="aspect-ratio" size={28}/>
+                        <TextInfo>{art.pixelsCont} ({Math.sqrt(art.pixelsCont)}x{Math.sqrt(art.pixelsCont)})</TextInfo>
+                    </ContainerInfo>
+                </ListContainerInfo>
             </Footer>
         </Container>
     )

@@ -4,15 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 export const Container = styled.View`
     padding: 4%;
-    padding-bottom: ${RFPercentage(16)}px;
-`
-
-export const Title = styled.Text`
-    margin-bottom: 8%;
-    font-weight: bold;
-    align-self: center;
-    font-size: ${RFPercentage(4)}px;
-    color: ${props => props.theme.primary};
+    margin-top: 5%;
+    padding-bottom: ${RFPercentage(15)}px;
 `
 
 export const MainOptions = styled.View`
@@ -35,7 +28,8 @@ export const IconOptionMain = styled(MaterialIcons)`
 `
 
 export const TextOptionMain = styled.Text`
-    margin-top: 5%;
+    margin-top: 8%;
+    margin-bottom: 8%;
     font-weight: bold;
     text-align: center;
     font-size: ${RFPercentage(2.8)}px;

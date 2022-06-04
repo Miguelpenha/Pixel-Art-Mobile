@@ -37,10 +37,38 @@ export const ImageArt = styled.Image`
     aspect-ratio: 1;
 `
 
-export const Footer = styled.TouchableOpacity`
+export const Footer = styled.View`
     padding-bottom: 2%;
     padding-left: 1.5%;
     padding-right: 1.5%;
+    flex-direction: row;
+`
+
+export const ContainerInfoButton = styled.TouchableOpacity`
+    margin-top: 2%;
+    margin-right: 2%;
+    flex-direction: row;
+    align-items: center;
+`
+
+interface IIconInfoLike {
+    select: boolean
+    mainColor: string
+    secondaryColor: string
+}
+
+export const IconInfoLike = styled(MaterialIcons)<IIconInfoLike>`
+    color: ${props => {
+        if (props.select) {
+            return props.mainColor
+        } else {
+            return props.secondaryColor
+        }
+    }};
+`
+
+export const ListContainerInfo = styled.TouchableOpacity`
+    margin-left: auto;
     flex-direction: row;
 `
 
