@@ -3,9 +3,12 @@ export interface Itheme {
   color: string
   check: string
   primary: string
+  likeColor: string
   secondary: string
+  viewLastColor: string
   secondaryColor: string
   backgroundColor: string
+  backgroundColorSecondary: string
 }
 
 export type Inavigation = {

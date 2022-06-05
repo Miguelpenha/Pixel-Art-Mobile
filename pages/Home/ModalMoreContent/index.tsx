@@ -56,8 +56,8 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         modalRef.current.close()
 
         Toast.show({
-            type: 'success',
-            text1: 'Link copiado com sucesso'
+            type: 'info',
+            text1: 'Link copiado para a sua área de transferência'
         })
     }
 
@@ -67,8 +67,8 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         modalRef.current.close()
 
         Toast.show({
-            type: 'success',
-            text1: 'Link da foto copiado com sucesso'
+            type: 'info',
+            text1: 'Link da foto copiado para a sua área de transferência'
         })
     }
 
@@ -76,8 +76,8 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         modalRef.current.close()
 
         Toast.show({
-            type: 'success',
-            text1: 'Arte salva com favorita'
+            type: 'info',
+            text1: 'Arte salva em favoritas'
         })
     }
     

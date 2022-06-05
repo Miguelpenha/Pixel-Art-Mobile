@@ -51,20 +51,16 @@ export const ContainerInfoButton = styled.TouchableOpacity`
     align-items: center;
 `
 
-interface IIconInfoLike {
+interface IIconInfoLikeOrViewLast {
     select: boolean
-    mainColor: string
-    secondaryColor: string
 }
 
-export const IconInfoLike = styled(MaterialIcons)<IIconInfoLike>`
-    color: ${props => {
-        if (props.select) {
-            return props.mainColor
-        } else {
-            return props.secondaryColor
-        }
-    }};
+export const IconInfoLike = styled(MaterialIcons)<IIconInfoLikeOrViewLast>`
+    color: ${props => props.select ? props.theme.likeColor : props.theme.secondaryColor};
+`
+
+export const IconInfoViewLast = styled(MaterialIcons)<IIconInfoLikeOrViewLast>`
+    color: ${props => props.select ? props.theme.viewLastColor : props.theme.secondaryColor};
 `
 
 export const ListContainerInfo = styled.TouchableOpacity`

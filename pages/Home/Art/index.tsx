@@ -2,7 +2,7 @@ import { FC, memo, useState } from 'react'
 import { Iart } from '../../../types'
 import { useTheme } from 'styled-components'
 import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
-import { Container, Header, ContainerName, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
+import { Container, Header, ContainerName, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, IconInfoViewLast, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
 
 interface Iprops {
     art: Iart
@@ -36,10 +36,10 @@ const Art: FC<Iprops> = ({ art, onClickFooter, onClickMore, nameStyle, imageStyl
             />
             <Footer>
                 <ContainerInfoButton onPress={() => setLike(!like)}>
-                    <IconInfoLike select={like} mainColor={theme.primary} secondaryColor={theme.secondaryColor} name={`favorite${like ? '' : '-outline'}`} size={28}/>
+                    <IconInfoLike select={like} name={`favorite${like ? '' : '-outline'}`} size={28}/>
                 </ContainerInfoButton>
                 <ContainerInfoButton onPress={() => setViewLast(!viewLast)}>
-                    <IconInfoLike select={viewLast} mainColor={theme.check} secondaryColor={theme.secondaryColor} name={`bookmark${viewLast ? '' : '-outline'}`} size={28}/>
+                    <IconInfoViewLast select={viewLast} name={`bookmark${viewLast ? '' : '-outline'}`} size={28}/>
                 </ContainerInfoButton>
                 <ListContainerInfo onPress={() => onClickFooter()}>
                     <ContainerInfo>

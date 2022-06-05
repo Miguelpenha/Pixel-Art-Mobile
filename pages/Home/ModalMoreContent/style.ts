@@ -12,7 +12,7 @@ export const MainOptions = styled.View`
     padding-bottom: 2%;
     flex-direction: row;
     justify-content: space-around;
-    border-bottom-width: ${RFPercentage(0.5)}px;
+    border-bottom-width: ${RFPercentage(0.4)}px;
     border-bottom-color: ${props => props.theme.secondaryColor};
 `
 
