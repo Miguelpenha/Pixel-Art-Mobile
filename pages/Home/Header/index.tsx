@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Container, ContainerSettings, Settings, Title } from './style'
+import { Container, ContainerSettings, Settings, Title, ButtonCreate, IconButtonCreate } from './style'
 
 function Header() {
     const navigation = useNavigation()
@@ -12,6 +12,9 @@ function Header() {
             </ContainerSettings>
         </Container>
         <Title>Pixel Art</Title>
+        <ButtonCreate onPress={() => navigation.navigate('CreateArt')}>
+            <IconButtonCreate name="add" size={35}/>
+        </ButtonCreate>
     </>
 }
 

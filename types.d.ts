@@ -14,6 +14,7 @@ export interface Itheme {
 export type Inavigation = {
   Home: undefined
   Settings: undefined
+  CreateArt: undefined
 }
 
 export interface Ipixel {

@@ -8,6 +8,7 @@ import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer } from '@react-navigation/native'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
+import CreateArt from './pages/CreateArt'
 import { getThemeFunction } from './utils/getTheme'
 import updateApp from './utils/updateApp'
 import 'react-native-gesture-handler'
@@ -74,6 +75,7 @@ function App() {
                 />
               }
             </Screen>
+            <Screen name="CreateArt" component={CreateArt}/>
           </Navigator>
         </NavigationContainer>
         <Toast config={toastConfig}/>
