@@ -92,6 +92,7 @@ export const IconRightMutateNumber = styled(MaterialIcons)`
 export const ButtonCreate = styled.TouchableOpacity`
     padding: 4% 0%;
     margin-top: 12%;
+    margin-bottom: 15%;
     flex-direction: row;
     border-radius: ${RFPercentage(2)}px;
     background-color: ${props => props.theme.primary};
