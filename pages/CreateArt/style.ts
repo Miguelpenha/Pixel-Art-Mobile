@@ -8,15 +8,20 @@ export const Arts = styled.FlatList`
 
 export const Title = styled.Text`
     font-weight: bold;
-    margin-bottom: 5%;
     align-self: center;
     font-size: ${RFPercentage(5)}px;
     color: ${props => props.theme.primary};
 `
 
+export const Options = styled.View`
+    margin-top: 5%;
+    margin-bottom: 6%;
+    flex-direction: row;
+`
+
 export const ButtonColorSelectInfo = styled.TouchableOpacity`
     padding: 2%;
-    margin-top: 5%;
+    margin-left: 3%;
     align-self: center;
     flex-direction: row;
     border-radius: ${RFPercentage(1)}px;
@@ -28,17 +33,29 @@ interface IColorSelectInfo {
 }
 
 export const ColorSelectInfo = styled.Text<IColorSelectInfo>`
-    width: 6.5%;
+    width: 16%;
     border-radius: ${RFPercentage(0.5)}px;
     background-color: ${props => props.color};
     border: 1px solid ${props => props.theme.color};
 `
 
 export const TextColorSelectInfo = styled.Text`
-    margin-left: 2%;
+    margin-left: 5%;
     font-weight: bold;
     align-self: center;
     font-size: ${RFPercentage(2.5)}px;
+    color: ${props => props.theme.color};
+`
+
+export const ButtonClear = styled.TouchableOpacity`
+    padding: 2%;
+    margin-left: 36%;
+    align-self: center;
+    border-radius: ${RFPercentage(5)}px;
+    background-color: ${props => props.theme.primary};
+`
+
+export const IconClear = styled(MaterialIcons)`
     color: ${props => props.theme.color};
 `
 
@@ -91,7 +108,7 @@ export const IconRightMutateNumber = styled(MaterialIcons)`
 
 export const ButtonCreate = styled.TouchableOpacity`
     padding: 4% 0%;
-    margin-top: 12%;
+    margin-top: 2%;
     margin-bottom: 15%;
     flex-direction: row;
     border-radius: ${RFPercentage(2)}px;
@@ -99,14 +116,33 @@ export const ButtonCreate = styled.TouchableOpacity`
 `
 
 export const TextButtonCreate = styled.Text`
-    padding-left: 5%;
+    margin: auto;
     font-weight: bold;
+    margin-right: 10%;
     font-size: ${RFPercentage(3.5)}px;
     color: ${props => props.theme.color};
 `
 
 export const IconButtonCreate = styled(MaterialIcons)`
-    margin-left: 10%;
+    margin-right: 20%;
+    color: ${props => props.theme.color};
+`
+
+export const ContainerColorPicker = styled.View`
+    width: 85%;
     align-self: center;
+`
+
+export const ButtonSubmitColor = styled.TouchableOpacity`
+    padding: 4% 8%;
+    margin-top: 12%;
+    align-self: center;
+    border-radius: ${RFPercentage(2)}px;
+    background-color: ${props => props.theme.primary};
+`
+
+export const TextButtonSubmitColor = styled.Text`
+    font-weight: bold;
+    font-size: ${RFPercentage(4)}px;
     color: ${props => props.theme.color};
 `
