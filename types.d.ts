@@ -11,6 +11,8 @@ export interface Itheme {
   backgroundColorSecondary: string
 }
 
+export type IthemeType = 'light' | 'dark'
+
 export type Inavigation = {
   Home: undefined
   Settings: undefined

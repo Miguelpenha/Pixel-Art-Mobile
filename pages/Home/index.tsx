@@ -10,8 +10,8 @@ import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
 import { useTheme } from 'styled-components'
-import { Loading } from './style'
-import { useFocusEffect } from '@react-navigation/native'
+import { Loading, ButtonCreate, IconButtonCreate } from './style'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 export default function Home() {
   const [arts, setArts] = useState<Iart[]>(null)
@@ -19,6 +19,7 @@ export default function Home() {
   const modalFooter = useRef<Modalize>(null)
   const modalMore = useRef<Modalize>(null)
   const [refreshing, setRefreshing] = useState(false)
+  const navigation = useNavigation()
   const theme = useTheme()
   
   useEffect(() => {
@@ -56,6 +57,9 @@ export default function Home() {
   if (arts) {
     return (
       <ContainerPd>
+        <ButtonCreate onPress={() => navigation.navigate('CreateArt')}>
+            <IconButtonCreate name="add" size={35}/>
+        </ButtonCreate>
         <FlatList
           data={arts}
           renderItem={RenderArt}

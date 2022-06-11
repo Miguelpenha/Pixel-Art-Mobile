@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 export const ContainerSwitch = styled.View`
     margin-top: 2%;
+    align-items: center;
     flex-direction: row;
     justify-content: center;
 `
@@ -14,7 +15,7 @@ export const TextSwitch = styled.Text`
 `
 
 export const Switch = styled.Switch`
-    margin-left: 2%;
+    margin-left: 1%;
 `
 
 interface IButton {

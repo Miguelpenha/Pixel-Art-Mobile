@@ -36,10 +36,10 @@ const Art: FC<Iprops> = ({ art, onClickFooter, onClickMore, nameStyle, imageStyl
             />
             <Footer>
                 <ContainerInfoButton onPress={() => setLike(!like)}>
-                    <IconInfoLike select={like} name={`favorite${like ? '' : '-outline'}`} size={28}/>
+                    <IconInfoLike select={like} name={`favorite${like ? '' : '-outline'}`} size={30}/>
                 </ContainerInfoButton>
                 <ContainerInfoButton onPress={() => setViewLast(!viewLast)}>
-                    <IconInfoViewLast select={viewLast} name={`bookmark${viewLast ? '' : '-outline'}`} size={28}/>
+                    <IconInfoViewLast select={viewLast} name={`bookmark${viewLast ? '' : '-outline'}`} size={30}/>
                 </ContainerInfoButton>
                 <ListContainerInfo onPress={() => onClickFooter()}>
                     <ContainerInfo>
