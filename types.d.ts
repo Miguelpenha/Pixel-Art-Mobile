@@ -23,7 +23,7 @@ export interface Ipixel {
 }
 
 export interface Iart {
-  _id: string
+  _id?: string
   name: string
   pixelsCont: number
   sizePixel: number

@@ -1,16 +1,17 @@
-import { FC, useState, memo } from 'react'
+import { Dispatch, SetStateAction, FC, useState, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { Container } from './style'
 import { Ipixel } from '../../../types'
 
 interface Iprops {
-    pixelOrigem: Ipixel
+    pixel: Ipixel
     pixelsCount: number
     colorSelect: string
+    pixels: Ipixel[]
+    setPixels: Dispatch<SetStateAction<Ipixel[]>>
 }
 
-const Pixel: FC<Iprops> = ({ pixelOrigem, pixelsCount, colorSelect }) => {
-    const [pixel, setPixel] = useState(pixelOrigem)
+const Pixel: FC<Iprops> = ({ pixel, pixelsCount, colorSelect, pixels, setPixels }) => {
     const theme = useTheme()
     const pixelSizes = Math.sqrt(pixelsCount)
 
@@ -20,10 +21,20 @@ const Pixel: FC<Iprops> = ({ pixelOrigem, pixelsCount, colorSelect }) => {
             pixel={pixel}
             pixelSizes={pixelSizes}
             onPress={() => {
-                setPixel(pixel => ({
-                    ...pixel,
-                    color: pixel.color!=colorSelect ? colorSelect : theme.secondary
-                }))
+                const pixelsBrutos: Ipixel[] = []
+                
+                pixels.map(pixelBruto => {
+                    if (pixelBruto.id === pixel.id) {
+                        pixelsBrutos.push({
+                            id: pixel.id,
+                            color: pixelBruto.color === colorSelect ? theme.secondary : colorSelect
+                        })
+                    } else {
+                        pixelsBrutos.push(pixelBruto)
+                    }
+                })
+        
+                setPixels(pixelsBrutos)
             }}
         />
     )

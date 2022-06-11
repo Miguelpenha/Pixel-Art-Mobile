@@ -13,6 +13,17 @@ export const Title = styled.Text`
     color: ${props => props.theme.primary};
 `
 
+export const NameArt = styled.TextInput`
+    border-radius: ${RFPercentage(1.5)}px;
+    padding: 2%;
+    width: 55%;
+    align-self: center;
+    font-size: ${RFPercentage(3)}px;
+    margin-top: 5%;
+    color: ${props => props.theme.color};
+    background-color: ${props => props.theme.secondary};
+`
+
 export const Options = styled.View`
     margin-top: 5%;
     margin-bottom: 6%;

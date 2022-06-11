@@ -11,6 +11,7 @@ import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
 import { useTheme } from 'styled-components'
 import { Loading } from './style'
+import { useFocusEffect } from '@react-navigation/native'
 
 export default function Home() {
   const [arts, setArts] = useState<Iart[]>(null)
@@ -23,6 +24,10 @@ export default function Home() {
   useEffect(() => {
     getArts(setArts).then()
   }, [])
+
+  useFocusEffect(() => {
+    getArts(setArts).then()
+  })
 
   function RenderArt({ item }: ListRenderItemInfo<Iart>) {
     return (
