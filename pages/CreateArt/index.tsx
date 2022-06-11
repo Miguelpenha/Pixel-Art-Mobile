@@ -41,7 +41,7 @@ function CreateArt() {
     const theme = useTheme()
     const modalColorPicker = useRef<Modalize>(null)
     const [pixels, setPixels] = useState<Ipixel[]>([])
-    const [pixelsCount, setPixelsCount] = useState(16)
+    const [pixelsCount, setPixelsCount] = useState(25)
     const [colorSelect, setColorSelect] = useState(theme.primary)
 
     function makePixels() {
@@ -105,7 +105,7 @@ function CreateArt() {
                             </ContainerRightMutateNumber>
                         </DataMutateNumber>
                     </ContainerMutateNumber>
-                    <ButtonCreate onPress={() => {
+                    <ButtonCreate onPress={async () => {
                         navigation.navigate('Home')
                         
                         Toast.show({
