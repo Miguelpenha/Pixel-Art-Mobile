@@ -1,19 +1,14 @@
-import { SuccessToast, ErrorToast, BaseToast } from 'react-native-toast-message'
-import { ViewStyle, TextStyle, ColorValue } from 'react-native'
-import { RFPercentage } from 'react-native-responsive-fontsize'
+import { ColorValue } from 'react-native'
+import { BaseToastProps, ToastConfig } from 'react-native-toast-message'
 import { useTheme } from 'styled-components'
-
-interface IconfigBase {
-    style: ViewStyle
-    contentContainerStyle: ViewStyle
-    text1Style: TextStyle
-}
+import { RFPercentage } from 'react-native-responsive-fontsize'
+import { SuccessToast, ErrorToast, BaseToast } from 'react-native-toast-message'
 
 interface Iprops {
     colorBorder: ColorValue
 }
 
-function configBase({ colorBorder }: Iprops): IconfigBase {
+function configBase({ colorBorder }: Iprops): BaseToastProps {
     const theme = useTheme()
 
     return {
@@ -33,7 +28,7 @@ function configBase({ colorBorder }: Iprops): IconfigBase {
     }
 }
 
-const toastConfig = {
+const toastConfig: ToastConfig = {
     success: props => (
         <SuccessToast
             {...props}
