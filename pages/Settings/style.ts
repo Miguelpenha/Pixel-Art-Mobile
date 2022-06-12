@@ -59,7 +59,23 @@ export const TextButton = styled.Text`
 export const Version = styled.Text`
     margin-top: auto;
     align-self: center;
-    margin-bottom: 8%;
+    margin-bottom: 2%;
     font-size: ${RFPercentage(3.2)}px;
     color: ${props => props.theme.secondaryColor};
+`
+
+export const ContainerPoweredBy = styled.View`
+    align-items: center;
+    margin-bottom: 5%;
+`
+
+export const TextPoweredBy = styled.Text`
+    font-weight: bold;
+    font-size: ${RFPercentage(3)}px;
+    color: ${props => props.theme.primary};
+`
+
+export const TextPoweredByName = styled.Text`
+    font-size: ${RFPercentage(3)}px;
+    color: ${props => props.theme.primary};
 `

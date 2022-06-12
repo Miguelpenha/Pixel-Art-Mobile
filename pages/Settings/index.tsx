@@ -4,7 +4,7 @@ import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
 import { dark as darkTheme, light as lightTheme } from '../../theme'
 import { ScrollView } from 'react-native'
-import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButton, TextButton, Version } from './style'
+import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButton, TextButton, Version, ContainerPoweredBy, TextPoweredBy, TextPoweredByName } from './style'
 import Constants from 'expo-constants'
 import checkUpdate from './checkUpdate'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -55,6 +55,10 @@ const Settings: FC<Iprops> = ({ setTheme, theme }) => {
                 </Button>
             </ScrollView>
             <Version>Versão {Constants.manifest.version}</Version>
+            <ContainerPoweredBy>
+                <TextPoweredBy>Powered by</TextPoweredBy>
+                <TextPoweredByName>Miguel da Penha</TextPoweredByName>
+            </ContainerPoweredBy>
         </ContainerPd>
     )
 }
