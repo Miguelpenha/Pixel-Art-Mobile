@@ -130,13 +130,18 @@ export const TextButtonCreate = styled.Text`
     margin: auto;
     font-weight: bold;
     margin-right: 10%;
-    font-size: ${RFPercentage(3.5)}px;
+    font-size: ${RFPercentage(3.8)}px;
     color: ${props => props.theme.color};
 `
 
 export const IconButtonCreate = styled(MaterialIcons)`
     margin-right: 20%;
+    align-self: center;
     color: ${props => props.theme.color};
+`
+
+export const Loading = styled.ActivityIndicator`
+    margin: auto;
 `
 
 export const ContainerColorPicker = styled.View`

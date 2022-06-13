@@ -27,11 +27,12 @@ import {
     ContainerColorPicker,
     ButtonSubmitColor,
     TextButtonSubmitColor,
-    NameArt
+    NameArt,
+    Loading
 } from './style'
 import Pixel from './Pixel'
 import { useState, useRef, useEffect } from 'react'
-import { ListRenderItemInfo } from 'react-native'
+import { ListRenderItemInfo, TextInput, Platform } from 'react-native'
 import Toast from 'react-native-toast-message'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import { Modalize } from 'react-native-modalize'
@@ -45,8 +46,10 @@ function CreateArt() {
     const modalColorPicker = useRef<Modalize>(null)
     const [pixels, setPixels] = useState<Ipixel[]>([])
     const [pixelsCount, setPixelsCount] = useState(25)
+    const [loadingCreate, setLoadingCreate] = useState(false)
     const [colorSelect, setColorSelect] = useState(theme.primary)
     const [name, setName] = useState('')
+    const nameRef = useRef<TextInput>(null)
 
     function makePixels() {
         setPixels([])
@@ -68,7 +71,7 @@ function CreateArt() {
         return <>
             <HeaderBack onClick={() => navigation.goBack()}/>
             <Title>Criar arte</Title>
-            <NameArt autoCapitalize="sentences" autoCompleteType="username" defaultValue={name} onChangeText={setName} autoCorrect selectionColor={theme.primary} placeholder="Nome da arte..." placeholderTextColor={theme.secondaryColor}/>
+            <NameArt ref={nameRef} autoCapitalize="sentences" autoCompleteType="username" defaultValue={name} onChangeText={setName} autoCorrect selectionColor={theme.primary} placeholder="Nome da arte..." placeholderTextColor={theme.secondaryColor}/>
             <Options>
                 <ButtonColorSelectInfo onPress={() => modalColorPicker.current.open()}>
                     <ColorSelectInfo color={colorSelect}/>
@@ -116,6 +119,8 @@ function CreateArt() {
                     </ContainerMutateNumber>
                     <ButtonCreate onPress={async () => {
                         if (name) {
+                            setLoadingCreate(true)
+                            
                             const { download: urlDownload } = (await api.post('/arts/makeImage', {
                                 pixels: pixels,
                                 pixelsCont: pixelsCount
@@ -128,6 +133,8 @@ function CreateArt() {
                                 pixels,
                                 url: urlDownload
                             })
+
+                            setLoadingCreate(false)
     
                             navigation.navigate('Home')
                             
@@ -136,14 +143,20 @@ function CreateArt() {
                                 text1: `Arte ${name} criada com sucesso!`
                             })
                         } else {
+                            nameRef.current.focus()
+
                             Toast.show({
                                 type: 'error',
                                 text1: 'É preciso fornecer um nome para a arte'
                             })
                         }
                     }}>
-                        <TextButtonCreate>Criar</TextButtonCreate>
-                        <IconButtonCreate name="design-services" size={30}/>
+                        {!loadingCreate ? <>
+                            <TextButtonCreate>Criar</TextButtonCreate>
+                            <IconButtonCreate name="design-services" size={35}/>
+                        </> : (
+                            <Loading color={theme.color} size={Platform.OS === 'android' ? 40 : 'small'}/>
+                        )}
                     </ButtonCreate>
                 </>}
             />
