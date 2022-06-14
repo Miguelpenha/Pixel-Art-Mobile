@@ -13,18 +13,18 @@ export const MainOptions = styled.View`
     flex-direction: row;
     justify-content: space-around;
     border-bottom-width: ${RFPercentage(0.4)}px;
-    border-bottom-color: ${props => props.theme.secondaryColor};
+    border-bottom-color: ${props => props.theme.backgroundColorSecondary};
 `
 
 export const ContainerIconOptionMain = styled.View`
     align-self: center;
     border-radius: ${RFPercentage(6)}px;
-    border: ${RFPercentage(0.4)}px solid ${props => props.theme.secondaryColor}; 
+    border: ${RFPercentage(0.4)}px solid ${props => props.theme.backgroundColorSecondary}; 
 `
 
 export const IconOptionMain = styled(MaterialIcons)`
     padding: 2%;
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.backgroundColorSecondary};
 `
 
 export const TextOptionMain = styled.Text`
@@ -33,7 +33,7 @@ export const TextOptionMain = styled.Text`
     font-weight: bold;
     text-align: center;
     font-size: ${RFPercentage(2.8)}px;
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.backgroundColorSecondary};
 `
 
 export const Option = styled.TouchableOpacity`
