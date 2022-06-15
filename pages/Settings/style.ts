@@ -24,7 +24,7 @@ interface IButton {
 
 export const Button = styled.TouchableOpacity<IButton>`
     padding: 3.5%;
-    margin-top: 5%;
+    margin-top: 8%;
     align-self: center;
     align-items: center;
     flex-direction: row;

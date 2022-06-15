@@ -15,7 +15,7 @@ const ModalFooterContent: FC<Iprops> = ({ art }) => {
             </ContainerInfo>
             <ContainerInfo>
                 <LabelInfo>Total de pixels da arte </LabelInfo>
-                <Info>{art.pixelsCont}</Info>
+                <Info>{art.pixelsCont} ({Math.sqrt(art.pixelsCont)}x{Math.sqrt(art.pixelsCont)})</Info>
             </ContainerInfo>
         </Container>
     )

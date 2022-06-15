@@ -1,6 +1,5 @@
 import { FC, memo, useState } from 'react'
 import { Iart } from '../../../types'
-import { useTheme } from 'styled-components'
 import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
 import { Container, Header, ContainerName, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, IconInfoViewLast, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
 
@@ -16,7 +15,6 @@ interface Iprops {
 const Art: FC<Iprops> = ({ art, onClickFooter, onClickMore, nameStyle, imageStyle, ...props }) => {
     const [like, setLike] = useState(false)
     const [viewLast, setViewLast] = useState(false)
-    const theme = useTheme()
 
     return (
         <Container {...props}>

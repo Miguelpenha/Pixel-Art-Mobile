@@ -46,11 +46,11 @@ const Settings: FC<Iprops> = ({ setTheme, theme }) => {
                         routes: [{ name: 'Home' }]
                     })
                 }}>
-                    <IconButton name="delete" size={32}/>
+                    <IconButton name="delete" size={30}/>
                     <TextButton>Apagar dados</TextButton>
                 </Button>
                 <Button disabled={checkUpdating} onPress={async () => checkUpdate(setCheckUpdating)} loading={checkUpdating}>
-                    <IconUpdateButton checkUpdating={checkUpdating} name="sync" size={32}/>
+                    <IconUpdateButton checkUpdating={checkUpdating} name="sync" size={30}/>
                     <TextButton>Verificar atualizações</TextButton>
                 </Button>
             </ScrollView>

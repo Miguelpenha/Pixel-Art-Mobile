@@ -16,7 +16,7 @@ export const Title = styled.Text`
 export const NameArt = styled.TextInput`
     border-radius: ${RFPercentage(1.5)}px;
     padding: 2%;
-    width: 55%;
+    width: 60%;
     align-self: center;
     font-size: ${RFPercentage(3)}px;
     margin-top: 5%;
