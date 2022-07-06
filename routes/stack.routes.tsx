@@ -1,16 +1,10 @@
-import { FC, Dispatch, SetStateAction } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { IthemeType, Inavigation } from '../types'
+import { Inavigation } from '../types'
 import Home from '../pages/Home'
 import Settings from '../pages/Settings'
 import CreateArt from '../pages/CreateArt'
 
-interface Iprops {
-    theme: IthemeType
-    setTheme: Dispatch<SetStateAction<IthemeType>>
-}
-
-const StackRouter: FC<Iprops> = ({ theme, setTheme }) => {
+function StackRouter() {
     const { Navigator, Screen } = createStackNavigator<Inavigation>()
 
     return (
@@ -21,15 +15,7 @@ const StackRouter: FC<Iprops> = ({ theme, setTheme }) => {
             }}
         >
             <Screen name="Home" component={Home}/>
-            <Screen name="Settings">
-                {props => 
-                    <Settings
-                        {...props}
-                        theme={theme}
-                        setTheme={setTheme}
-                    />
-                }
-            </Screen>
+            <Screen name="Settings" component={Settings}/>
             <Screen name="CreateArt" component={CreateArt}/>
         </Navigator>
     )

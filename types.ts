@@ -1,8 +1,8 @@
 export interface Itheme {
-  name: string
   color: string
   check: string
   primary: string
+  name: IthemeType
   likeColor: string
   secondary: string
   viewLastColor: string
@@ -11,7 +11,12 @@ export interface Itheme {
   backgroundColorSecondary: string
 }
 
-export type IthemeType = 'light' | 'dark'
+export enum ThemeNameType {
+  dark = 'dark',
+  light = 'light'
+}
+
+export type IthemeType = keyof typeof ThemeNameType
 
 export type Inavigation = {
   Home: undefined

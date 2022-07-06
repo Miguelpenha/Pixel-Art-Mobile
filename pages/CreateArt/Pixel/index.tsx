@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, FC, useState, memo } from 'react'
+import { Dispatch, SetStateAction, FC, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { Container } from './style'
 import { Ipixel } from '../../../types'

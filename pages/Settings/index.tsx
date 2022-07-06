@@ -8,26 +8,14 @@ import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButt
 import Constants from 'expo-constants'
 import checkUpdate from './checkUpdate'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { getThemeFunction } from '../../utils/getTheme'
+import { useContext } from 'react'
+import { ThemeContext } from '../../themeProvider'
 
-interface Iprops {
-    setTheme: Dispatch<SetStateAction<'light' | 'dark'>>
-    theme: 'light' | 'dark'
-}
-
-const Settings: FC<Iprops> = ({ setTheme, theme }) => {
+function Settings() {
     const navigation = useNavigation()
-    const [dark, setDark] = useState(theme==='light' ? false : true)
+    const { themeName, mutateTheme } = useContext(ThemeContext)
+    const [dark, setDark] = useState(themeName==='light' ? false : true)
     const [checkUpdating, setCheckUpdating] = useState(false)
-
-    useEffect(() => {
-        async function changeTheme() {
-            setTheme(dark ? 'dark' : 'light')
-            await AsyncStorage.setItem('@exercise-app:theme', dark ? 'dark' : 'light')
-        }
-        
-        changeTheme().then()
-    }, [dark])
     
     return (
         <ContainerPd>
@@ -35,11 +23,13 @@ const Settings: FC<Iprops> = ({ setTheme, theme }) => {
             <ScrollView>
                 <ContainerSwitch>
                     <TextSwitch>Tema escuro</TextSwitch>
-                    <Switch trackColor={{false: darkTheme.secondary, true: lightTheme.secondary}} thumbColor={dark ? darkTheme.secondary : lightTheme.secondary} value={dark} onChange={() => dark ? setDark(false) : setDark(true)}/>
+                    <Switch trackColor={{false: darkTheme.secondary, true: lightTheme.secondary}} thumbColor={dark ? darkTheme.secondary : lightTheme.secondary} value={dark} onChange={() => {
+                        dark ? setDark(false) : setDark(true)
+                        mutateTheme(dark ? 'light' : 'dark')
+                    }}/>
                 </ContainerSwitch>
                 <Button onPress={async () => {
                     await AsyncStorage.removeItem('@exercise-app:theme')
-                    await getThemeFunction(setTheme)
 
                     navigation.reset({
                         index: 0,

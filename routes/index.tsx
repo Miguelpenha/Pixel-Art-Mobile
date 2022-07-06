@@ -1,22 +1,28 @@
-import { FC, Dispatch, SetStateAction } from 'react'
-import { IthemeType } from '../types' 
+import { useTheme } from 'styled-components'
 import { NavigationContainer } from '@react-navigation/native'
 import { darkThemeRouter, lightThemeRouter } from './themeRouter'
 import StackRouter from './stack.routes'
+import { StatusBar } from 'expo-status-bar'
+import Toast from 'react-native-toast-message'
+import toastConfig from '../toastConfig'
 
-interface Iprops {
-    theme: IthemeType
-    setTheme: Dispatch<SetStateAction<IthemeType>>
-}
+function Routes() {
+  const theme = useTheme()
 
-const Routes: FC<Iprops> = ({ theme, setTheme }) => {
-    return (
-        <NavigationContainer
-          theme={theme === 'dark' ? darkThemeRouter : lightThemeRouter}
-        >
-          <StackRouter theme={theme} setTheme={setTheme}/>
+  return (
+    <>
+      <StatusBar
+        animated={true}
+        style={theme.name === 'light' ? 'dark' : 'light'}
+      />
+      <NavigationContainer
+        theme={theme.name === 'dark' ? darkThemeRouter : lightThemeRouter}
+      >
+        <StackRouter/>
       </NavigationContainer>
-    )
+      <Toast config={toastConfig}/>
+    </>
+  )
 }
 
 export default Routes

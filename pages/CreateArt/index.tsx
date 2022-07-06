@@ -79,7 +79,7 @@ function CreateArt() {
                 </ButtonColorSelectInfo>
                 <ButtonClear onPress={() => {
                     makePixels()
-
+                    
                     Toast.show({
                         type: 'info',
                         text1: 'Arte limpa'
