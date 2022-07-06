@@ -70,7 +70,7 @@ export default function Home() {
               refreshing={refreshing}
               colors={[theme.primary]}
               onRefresh={onRefreshAction}
-              progressViewOffset={RFPercentage(18)}
+              progressViewOffset={RFPercentage(11.5)}
               progressBackgroundColor={theme.secondary}
             />
           )}
