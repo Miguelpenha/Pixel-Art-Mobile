@@ -8,6 +8,7 @@ import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButt
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import checkUpdate from './checkUpdate'
 import Constants from 'expo-constants'
+import { blue, magenta } from '../../utils/colorsLogs'
 
 function Settings() {
     const navigation = useNavigation()
@@ -27,6 +28,10 @@ function Settings() {
                         trackColor={{false: theme.secondary, true: theme.secondary}}
                         onChange={() => {
                             dark ? setDark(false) : setDark(true)
+                            
+                            console.log(blue(`>> Theme changed`))
+                            console.log(magenta(`   >> ${dark ? 'light' : 'dark'}`))
+                            
                             mutateTheme()
                         }}
                     />
@@ -34,6 +39,8 @@ function Settings() {
                 <Button onPress={async () => {
                     await AsyncStorage.removeItem('@pixelArt:theme')
 
+                    console.log(blue('>> All data has been deleted'))
+                    
                     await loadTheme()
 
                     navigation.reset({

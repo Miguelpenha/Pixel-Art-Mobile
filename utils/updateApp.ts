@@ -1,4 +1,5 @@
 import * as Updates from 'expo-updates'
+import { green } from './colorsLogs'
 
 async function updateApp(response?: boolean): Promise<void | boolean> {
   if (process.env.NODE_ENV === 'production') {
@@ -6,6 +7,8 @@ async function updateApp(response?: boolean): Promise<void | boolean> {
 
     if (isAvailable) {
       if (Updates.releaseChannel === 'production') {
+        console.log(green('>> Update Available'))
+
         await Updates.fetchUpdateAsync()
         await Updates.reloadAsync()
         

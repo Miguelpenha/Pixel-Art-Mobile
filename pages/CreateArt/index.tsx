@@ -39,6 +39,8 @@ import api from '../../api'
 import { Iart } from '../../types'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ColorPicker from 'react-native-wheel-color-picker'
+import { blue, green, magenta } from '../../utils/colorsLogs'
+import limitText from '../../utils/limitText'
 
 function CreateArt() {
     const navigation = useNavigation()
@@ -126,7 +128,7 @@ function CreateArt() {
                                 pixelsCont: pixelsCount
                             })).data
                             
-                            await api.post<Iart>('/arts/create', {
+                            const { data: art } = await api.post<Iart>('/arts/create', {
                                 name: name,
                                 pixelsCont: pixelsCount,
                                 sizePixel: 80,
@@ -134,6 +136,14 @@ function CreateArt() {
                                 url: urlDownload
                             })
 
+                            console.log(blue('>> Pixel art created'))
+                            console.log(magenta(`  >> ID: ${art._id}`))
+                            console.log(magenta(`  >> Name: ${art.name}`))
+                            console.log(magenta(`  >> Pixels Count: ${art.pixelsCont}`))
+                            console.log(magenta(`  >> Size Pixel: ${art.sizePixel}`))
+                            console.log(magenta(`  >> URL: ${limitText(art.url, 50)}`))
+                            console.log(magenta(`  >> Colors: ${art.colors.map((color, index) => `${index === 0 ? '' : ' '}${color}`)}`))
+                            
                             setLoadingCreate(false)
     
                             navigation.navigate('Home')
