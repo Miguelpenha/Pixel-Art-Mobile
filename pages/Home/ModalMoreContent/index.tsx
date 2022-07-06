@@ -1,5 +1,5 @@
 import { Iart } from '../../../types'
-import { MutableRefObject, FC } from 'react'
+import { MutableRefObject, FC, useState, useEffect } from 'react'
 import { Modalize } from 'react-native-modalize'
 import * as MediaLibrary from 'expo-media-library'
 import * as FileSystem from 'expo-file-system'
@@ -9,6 +9,7 @@ import * as Clipboard from 'expo-clipboard'
 import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
 import { TouchableOpacity } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
+import { getFavorites, removeFavorite, setFavorite } from '../../../favorites'
 
 interface Iprops {
     art: Iart
@@ -17,6 +18,21 @@ interface Iprops {
 
 const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
     const [status, requestPermission] = MediaLibrary.usePermissions()
+    const [IsFavorite, setIsFavorite] = useState<boolean>(null)
+
+    useEffect(() => {
+        async function checkFavorite() {
+            const favorites = await getFavorites()
+    
+            if (favorites && favorites.includes(art._id)) {
+                setIsFavorite(true)
+            } else {
+                setIsFavorite(false)
+            }
+        }
+
+        checkFavorite().then()
+    }, [])
 
     async function download() {
         !status.granted && await requestPermission()
@@ -97,51 +113,76 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         })
     }
 
-    function favorite() {
+    async function favorite() {
         modalRef.current.close()
+        
+        await setFavorite(art._id)
 
+        setIsFavorite(true)
+        
         console.log(blue('>> Pixel art added to favorites'))
         console.log(magenta(`   >> ID: ${art._id}`))
         console.log(magenta(`   >> Name: ${art.name}`))
-        
+
         Toast.show({
             type: 'info',
             text1: 'Arte salva em favoritas'
         })
     }
     
-    return (
-        <Container>
-            <MainOptions>
-                <TouchableOpacity onPress={copyLink}>
-                    <ContainerIconOptionMain>
-                        <IconOptionMain name="link" size={30}/>
-                    </ContainerIconOptionMain>  
-                    <TextOptionMain>Link</TextOptionMain>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={download}>
-                    <ContainerIconOptionMain>
-                        <IconOptionMain name="file-download" size={30}/>
-                    </ContainerIconOptionMain>  
-                    <TextOptionMain>Baixar</TextOptionMain>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={favorite}>
-                    <ContainerIconOptionMain>
-                        <IconOptionMain name="star" size={30}/>
-                    </ContainerIconOptionMain>  
-                    <TextOptionMain>Favoritos</TextOptionMain>
-                </TouchableOpacity>
-            </MainOptions>
-            <Option onPress={copyImageLink}>
-                <IconOption name="image" size={28}/>
-                <TextOption>Link da foto</TextOption>
-            </Option>
-            <Option onPress={share}>
-                <IconOption name="share" size={28}/>
-                <TextOption>Compartilhar</TextOption>
-            </Option>
-        </Container>
-    )
+    async function deleteFavorite() {
+        modalRef.current.close()
+        
+        await removeFavorite(art._id)
+
+        setIsFavorite(false)
+        
+        console.log(blue('>> Pixel art removed from favorites'))
+        console.log(magenta(`   >> ID: ${art._id}`))
+        console.log(magenta(`   >> Name: ${art.name}`))
+
+        Toast.show({
+            type: 'error',
+            text1: 'Arte removida das favoritas'
+        })
+    }
+
+    if (IsFavorite != null) {
+        return (
+            <Container>
+                <MainOptions>
+                    <TouchableOpacity onPress={copyLink}>
+                        <ContainerIconOptionMain>
+                            <IconOptionMain name="link" size={30}/>
+                        </ContainerIconOptionMain>  
+                        <TextOptionMain>Link</TextOptionMain>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={download}>
+                        <ContainerIconOptionMain>
+                            <IconOptionMain name="file-download" size={30}/>
+                        </ContainerIconOptionMain>  
+                        <TextOptionMain>Baixar</TextOptionMain>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={IsFavorite ? deleteFavorite : favorite}>
+                            <ContainerIconOptionMain>
+                                <IconOptionMain name="star" size={30}/>
+                            </ContainerIconOptionMain>  
+                            <TextOptionMain>{IsFavorite ? 'Desfavoritar' : 'Favoritos'}</TextOptionMain>
+                        </TouchableOpacity>
+                </MainOptions>
+                <Option onPress={copyImageLink}>
+                    <IconOption name="image" size={28}/>
+                    <TextOption>Link da foto</TextOption>
+                </Option>
+                <Option onPress={share}>
+                    <IconOption name="share" size={28}/>
+                    <TextOption>Compartilhar</TextOption>
+                </Option>
+            </Container>
+        )
+    } else {
+        return null
+    }
 }
 
 export default ModalMoreContent

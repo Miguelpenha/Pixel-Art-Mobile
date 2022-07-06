@@ -8,7 +8,7 @@ import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButt
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import checkUpdate from './checkUpdate'
 import Constants from 'expo-constants'
-import { blue, magenta } from '../../utils/colorsLogs'
+import { blue, red, magenta, yellow } from '../../utils/colorsLogs'
 
 function Settings() {
     const navigation = useNavigation()
@@ -38,8 +38,11 @@ function Settings() {
                 </ContainerSwitch>
                 <Button onPress={async () => {
                     await AsyncStorage.removeItem('@pixelArt:theme')
+                    await AsyncStorage.removeItem('@pixelArt:favorites')
 
-                    console.log(blue('>> All data has been deleted'))
+                    console.log(yellow('>> All data has been deleted'))
+                    console.log(red('   >> @pixelArt:theme'))
+                    console.log(red('   >> @pixelArt:favorites'))
                     
                     await loadTheme()
 
