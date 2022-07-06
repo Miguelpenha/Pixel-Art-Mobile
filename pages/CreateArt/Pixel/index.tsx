@@ -1,7 +1,7 @@
+import { Ipixel } from '../../../types'
 import { Dispatch, SetStateAction, FC, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { Container } from './style'
-import { Ipixel } from '../../../types'
 
 interface Iprops {
     pixel: Ipixel
@@ -17,8 +17,8 @@ const Pixel: FC<Iprops> = ({ pixel, pixelsCount, colorSelect, pixels, setPixels 
 
     return (
         <Container
-            activeOpacity={0.6}
             pixel={pixel}
+            activeOpacity={0.6}
             pixelSizes={pixelSizes}
             onPress={() => {
                 const pixelsBrutos: Ipixel[] = []

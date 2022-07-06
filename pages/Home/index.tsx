@@ -1,17 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Iart } from '../../types'
+import { Modalize } from 'react-native-modalize'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import { useTheme } from 'styled-components'
 import getArts from './getArts'
+import { ListRenderItemInfo, FlatList, RefreshControl, Platform } from 'react-native'
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
-import { FlatList, ListRenderItemInfo, RefreshControl, Platform } from 'react-native'
+import { ButtonCreate, IconButtonCreate, Loading } from './style'
 import Header from './Header'
-import { Modalize } from 'react-native-modalize'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
-import { useTheme } from 'styled-components'
-import { Loading, ButtonCreate, IconButtonCreate } from './style'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 export default function Home() {
   const [arts, setArts] = useState<Iart[]>(null)

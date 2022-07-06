@@ -3,7 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 
 export const Container = styled.View`
-    margin-top: 7.5%;
+    margin-top: 2%;
     align-items: center;
     flex-direction: row;
 `

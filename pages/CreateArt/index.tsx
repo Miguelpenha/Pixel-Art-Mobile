@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
+import { useRef, useState, useEffect } from 'react'
+import { Modalize } from 'react-native-modalize'
 import { Ipixel } from '../../types'
+import { TextInput, ListRenderItemInfo, Platform } from 'react-native'
 import uuid from 'react-native-uuid'
-import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
 import {
     Arts,
@@ -30,15 +32,13 @@ import {
     NameArt,
     Loading
 } from './style'
-import Pixel from './Pixel'
-import { useState, useRef, useEffect } from 'react'
-import { ListRenderItemInfo, TextInput, Platform } from 'react-native'
 import Toast from 'react-native-toast-message'
-import { RFPercentage } from 'react-native-responsive-fontsize'
-import { Modalize } from 'react-native-modalize'
-import ColorPicker from 'react-native-wheel-color-picker'
+import ContainerPd from '../../components/ContainerPd'
+import Pixel from './Pixel'
 import api from '../../api'
 import { Iart } from '../../types'
+import { RFPercentage } from 'react-native-responsive-fontsize'
+import ColorPicker from 'react-native-wheel-color-picker'
 
 function CreateArt() {
     const navigation = useNavigation()

@@ -1,4 +1,4 @@
-import { Itheme } from './types'
+import { Itheme, ThemeNameType } from '../types'
 
 export const dark: Itheme = {
     name: 'dark',
@@ -24,4 +24,9 @@ export const light: Itheme = {
     check: '#4efdb7',
     likeColor: '#bf2431',
     viewLastColor: '#006acc'
+}
+
+export default {
+    [ThemeNameType.dark]: dark,
+    [ThemeNameType.light]: light
 }

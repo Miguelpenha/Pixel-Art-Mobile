@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
 import { ViewStyle } from 'react-native'
+import { FC } from 'react'
 import { Container } from './style'
 
 interface Iprops {

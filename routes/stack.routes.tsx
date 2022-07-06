@@ -6,7 +6,7 @@ import CreateArt from '../pages/CreateArt'
 
 function StackRouter() {
     const { Navigator, Screen } = createStackNavigator<Inavigation>()
-
+    
     return (
         <Navigator
             initialRouteName="Home"

@@ -1,6 +1,6 @@
-import { memo } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Container, ContainerSettings, Settings, Title } from './style'
+import { memo } from 'react'
 
 function Header() {
     const navigation = useNavigation()

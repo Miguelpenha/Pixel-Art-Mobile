@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import AppLoading from 'expo-app-loading'
-import ThemeProvider from './themeProvider'
 import updateApp from './utils/updateApp'
-import 'react-native-gesture-handler'
+import AppLoading from 'expo-app-loading'
+import { ThemeProvider } from './theme'
 import Routes from './routes'
+import 'react-native-gesture-handler'
 
 function App() {
   const [pronto, setPronto] = useState(false)

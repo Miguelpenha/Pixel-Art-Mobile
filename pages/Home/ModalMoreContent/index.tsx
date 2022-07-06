@@ -1,13 +1,13 @@
 import { Iart } from '../../../types'
-import { FC, MutableRefObject } from 'react'
-import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
-import { TouchableOpacity } from 'react-native'
+import { MutableRefObject, FC } from 'react'
 import { Modalize } from 'react-native-modalize'
+import * as MediaLibrary from 'expo-media-library'
+import * as FileSystem from 'expo-file-system'
+import Toast from 'react-native-toast-message'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
-import * as FileSystem from 'expo-file-system'
-import * as MediaLibrary from 'expo-media-library'
-import Toast from 'react-native-toast-message'
+import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
+import { TouchableOpacity } from 'react-native'
 
 interface Iprops {
     art: Iart

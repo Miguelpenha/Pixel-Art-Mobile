@@ -5,7 +5,7 @@ import { Container, ButtonBack, ContainerHeader, Title } from './style'
 interface Iprops {
     title?: string
     style?: ViewStyle
-    onClick: Function
+    onClick: () => void
     buttonBack?: boolean
     styleTitle?: TextStyle
     iconSizeButtonBack?: number

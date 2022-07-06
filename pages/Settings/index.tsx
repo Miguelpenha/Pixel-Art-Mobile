@@ -1,19 +1,17 @@
-import React, { useState, useEffect, FC, Dispatch, SetStateAction } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { useTheme } from '../../theme'
+import { useState } from 'react'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
-import { dark as darkTheme, light as lightTheme } from '../../theme'
 import { ScrollView } from 'react-native'
 import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButton, TextButton, Version, ContainerPoweredBy, TextPoweredBy, TextPoweredByName } from './style'
-import Constants from 'expo-constants'
-import checkUpdate from './checkUpdate'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useContext } from 'react'
-import { ThemeContext } from '../../themeProvider'
+import checkUpdate from './checkUpdate'
+import Constants from 'expo-constants'
 
 function Settings() {
     const navigation = useNavigation()
-    const { themeName, mutateTheme } = useContext(ThemeContext)
+    const { theme, themeName, mutateTheme, loadTheme } = useTheme()
     const [dark, setDark] = useState(themeName==='light' ? false : true)
     const [checkUpdating, setCheckUpdating] = useState(false)
     
@@ -23,13 +21,20 @@ function Settings() {
             <ScrollView>
                 <ContainerSwitch>
                     <TextSwitch>Tema escuro</TextSwitch>
-                    <Switch trackColor={{false: darkTheme.secondary, true: lightTheme.secondary}} thumbColor={dark ? darkTheme.secondary : lightTheme.secondary} value={dark} onChange={() => {
-                        dark ? setDark(false) : setDark(true)
-                        mutateTheme(dark ? 'light' : 'dark')
-                    }}/>
+                    <Switch
+                        value={dark}
+                        thumbColor={dark ? theme.primary : theme.primary}
+                        trackColor={{false: theme.secondary, true: theme.secondary}}
+                        onChange={() => {
+                            dark ? setDark(false) : setDark(true)
+                            mutateTheme()
+                        }}
+                    />
                 </ContainerSwitch>
                 <Button onPress={async () => {
-                    await AsyncStorage.removeItem('@exercise-app:theme')
+                    await AsyncStorage.removeItem('@pixelArt:theme')
+
+                    await loadTheme()
 
                     navigation.reset({
                         index: 0,

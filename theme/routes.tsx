@@ -1,5 +1,7 @@
 import { Theme } from '@react-navigation/native'
-import { dark, light } from '../theme'
+import { themes } from '.'
+
+const { dark, light } = themes
 
 const darkThemeRouter: Theme = {
     colors: {
@@ -24,6 +26,13 @@ const lightThemeRouter: Theme = {
     },
     dark: false
 }
+
+const themesRoutes = {
+    darkThemeRouter,
+    lightThemeRouter
+}
+
+export default themesRoutes
 
 export {
     darkThemeRouter,

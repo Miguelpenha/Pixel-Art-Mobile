@@ -1,7 +1,7 @@
-import { FC, memo, useState } from 'react'
 import { Iart } from '../../../types'
-import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
-import { Container, Header, ContainerName, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, IconInfoViewLast, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
+import { ViewStyle, TextStyle, ImageStyle, TouchableOpacity } from 'react-native'
+import { FC, useState, memo } from 'react'
+import { Container, Header, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, IconInfoViewLast, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
 
 interface Iprops {
     art: Iart
@@ -19,9 +19,9 @@ const Art: FC<Iprops> = ({ art, onClickFooter, onClickMore, nameStyle, imageStyl
     return (
         <Container {...props}>
             <Header>
-                <ContainerName>
+                <TouchableOpacity>
                     <Name style={nameStyle}>{art.name}</Name>
-                </ContainerName>
+                </TouchableOpacity>
                 <ContainerIconMore onPress={() => onClickMore()}>
                     <IconMore name="more-vert" size={30}/>
                 </ContainerIconMore>

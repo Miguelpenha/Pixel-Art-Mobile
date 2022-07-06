@@ -14,13 +14,13 @@ export const Title = styled.Text`
 `
 
 export const NameArt = styled.TextInput`
-    border-radius: ${RFPercentage(1.5)}px;
-    padding: 2%;
     width: 60%;
+    padding: 2%;
+    margin-top: 5%;
     align-self: center;
     font-size: ${RFPercentage(3)}px;
-    margin-top: 5%;
     color: ${props => props.theme.color};
+    border-radius: ${RFPercentage(1.5)}px;
     background-color: ${props => props.theme.secondary};
 `
 

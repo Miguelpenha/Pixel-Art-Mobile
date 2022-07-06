@@ -1,32 +1,28 @@
-import { IthemeType, ThemeNameType, Itheme } from './types'
-import { dark, light } from './theme'
-import { createContext, FC, useState, useEffect } from 'react'
+import { IthemeType, ThemeNameType, Itheme } from '../types'
+import { createContext, FC, useState, useEffect, useContext } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Appearance } from 'react-native'
 import { ThemeProvider as ThemeStyledProvider } from 'styled-components'
+import themesLightAndDark from './theme'
 
 interface IThemeContext {
     theme: Itheme
     themeName: IthemeType
     mutateTheme: ImutateTheme
+    loadTheme: () => Promise<void>
 }
 
 type ImutateTheme = (mutateTheme?: IthemeType) => void
 
-const themes = {
-    [ThemeNameType.dark]: dark,
-    [ThemeNameType.light]: light
-}
-
 export const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 
-const ThemeProvider: FC = ({ children }) => {
+export const ThemeProvider: FC = ({ children }) => {
     const [themeName, setThemeName] = useState<IthemeType>(ThemeNameType.light)
-
+    
     useEffect(() => {
-        loadTheme()
+        loadTheme().then()
     }, [themeName])
-
+    
     async function loadTheme() {
         const themeName = await AsyncStorage.getItem('@pixelArt:theme') as (IthemeType | null)
         
@@ -34,14 +30,15 @@ const ThemeProvider: FC = ({ children }) => {
             setThemeName(themeName)
         } else {
             setThemeName(Appearance.getColorScheme() || 'light')
+            AsyncStorage.setItem('@pixelArt:theme', Appearance.getColorScheme() || 'light')
         }
     }
 
-    function mutateTheme(themeName?: IthemeType) {
+    function mutateTheme(themeNameMutate?: IthemeType) {
         let themeNameSelect: IthemeType
 
-        if (themeName) {
-            themeNameSelect = themeName
+        if (themeNameMutate) {
+            themeNameSelect = themeNameMutate
         } else {
             themeNameSelect = themeName === ThemeNameType.light ? ThemeNameType.dark : ThemeNameType.light
         }
@@ -52,7 +49,7 @@ const ThemeProvider: FC = ({ children }) => {
     }
 
     return (
-        <ThemeContext.Provider value={{theme: themes[themeName], mutateTheme, themeName}}>
+        <ThemeContext.Provider value={{theme: themes[themeName], mutateTheme, themeName, loadTheme}}>
             <ThemeStyledProvider theme={themes[themeName]}>
                 {children}
             </ThemeStyledProvider>
@@ -60,4 +57,10 @@ const ThemeProvider: FC = ({ children }) => {
     )
 }
 
-export default ThemeProvider
+export function useTheme() {
+    return useContext(ThemeContext)
+}
+
+export const themes = themesLightAndDark
+
+export default useTheme

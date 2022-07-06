@@ -15,10 +15,6 @@ export const Header = styled.View`
     align-items: center;
 `
 
-export const ContainerName = styled.TouchableOpacity`
-    
-`
-
 export const Name = styled.Text`
     font-size: ${RFPercentage(3)}px;
     color: ${props => props.theme.secondaryColor};
