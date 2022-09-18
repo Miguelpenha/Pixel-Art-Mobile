@@ -1,6 +1,8 @@
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import { MaterialIcons } from '@expo/vector-icons'
+import { TapGestureHandler } from 'react-native-gesture-handler'
+import Animated from 'react-native-reanimated'
 
 export const Container = styled.View`
     width: 100%;
@@ -34,9 +36,8 @@ export const ImageArt = styled.Image`
 `
 
 export const Footer = styled.View`
+    padding-left: 3%;
     padding-bottom: 2%;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
     flex-direction: row;
 `
 
