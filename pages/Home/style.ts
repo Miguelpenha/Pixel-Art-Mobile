@@ -3,10 +3,6 @@ import { RFPercentage } from 'react-native-responsive-fontsize'
 import { Dimensions } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
-export const Loading = styled.ActivityIndicator`
-    margin: auto;
-`
-
 export const ButtonCreate = styled.TouchableOpacity`
     z-index: 10;
     padding: 0.5%;
@@ -19,4 +15,8 @@ export const ButtonCreate = styled.TouchableOpacity`
 
 export const IconButtonCreate = styled(MaterialIcons)`
     color: ${props => props.theme.color};
+`
+
+export const Loading = styled.ActivityIndicator`
+    margin: auto;
 `

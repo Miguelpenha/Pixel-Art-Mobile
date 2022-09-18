@@ -36,7 +36,7 @@ import Toast from 'react-native-toast-message'
 import ContainerPd from '../../components/ContainerPd'
 import Pixel from './Pixel'
 import api from '../../api'
-import { Iart } from '../../types'
+import { IArt } from '../../types'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ColorPicker from 'react-native-wheel-color-picker'
 import { blue, green, magenta } from '../../utils/colorsLogs'
@@ -128,7 +128,7 @@ function CreateArt() {
                                 pixelsCont: pixelsCount
                             })).data
                             
-                            const { data: art } = await api.post<Iart>('/arts/create', {
+                            const { data: art } = await api.post<IArt>('/arts/create', {
                                 name: name,
                                 pixelsCont: pixelsCount,
                                 sizePixel: 80,

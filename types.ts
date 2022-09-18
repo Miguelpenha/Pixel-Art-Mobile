@@ -1,6 +1,7 @@
 export interface Itheme {
   color: string
-  check: string
+  error: string
+  success: string
   primary: string
   name: IthemeType
   likeColor: string
@@ -29,7 +30,7 @@ export interface Ipixel {
   color: string
 }
 
-export interface Iart {
+export interface IArt {
   _id?: string
   name: string
   pixelsCont: number

@@ -1,10 +1,10 @@
-import { Iart } from '../../../types'
+import { IArt } from '../../../types'
 import { ViewStyle, TextStyle, ImageStyle, TouchableOpacity } from 'react-native'
 import { FC, useState, memo } from 'react'
 import { Container, Header, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoLike, IconInfoViewLast, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
 
 interface Iprops {
-    art: Iart
+    art: IArt
     onClickFooter: Function
     onClickMore: Function
     style?: ViewStyle

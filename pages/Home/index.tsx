@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Iart } from '../../types'
+import { IArt } from '../../types'
 import { Modalize } from 'react-native-modalize'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
@@ -12,10 +12,11 @@ import Header from './Header'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
+import optionsModalize from '../../components/optionsModalize'
 
 export default function Home() {
-  const [arts, setArts] = useState<Iart[]>(null)
-  const [artSelect, setArtSelect] = useState<Iart>(null)
+  const [arts, setArts] = useState<IArt[]>(null)
+  const [artSelect, setArtSelect] = useState<IArt>(null)
   const modalFooter = useRef<Modalize>(null)
   const modalMore = useRef<Modalize>(null)
   const [refreshing, setRefreshing] = useState(false)
@@ -30,7 +31,7 @@ export default function Home() {
     getArts(setArts).then()
   })
 
-  function RenderArt({ item }: ListRenderItemInfo<Iart>) {
+  function RenderArt({ item }: ListRenderItemInfo<IArt>) {
     return (
       <Art
         art={item}
@@ -64,7 +65,7 @@ export default function Home() {
           data={arts}
           renderItem={RenderArt}
           ListHeaderComponent={Header}
-          keyExtractor={(item: Iart) => item._id}
+          keyExtractor={(item: IArt) => item._id}
           refreshControl={(
             <RefreshControl
               refreshing={refreshing}
@@ -75,10 +76,10 @@ export default function Home() {
             />
           )}
         />
-        <Modalize ref={modalFooter} modalHeight={RFPercentage(50)} modalStyle={{backgroundColor: theme.backgroundColor}}>
+        <Modalize {...optionsModalize(theme, 50)} ref={modalFooter}>
           <ModalFooterContent art={artSelect}/>
         </Modalize>
-        <Modalize ref={modalMore} modalHeight={RFPercentage(70)} modalStyle={{backgroundColor: theme.backgroundColor}}>
+        <Modalize {...optionsModalize(theme, 90, 50)} ref={modalMore}>
           <ModalMoreContent art={artSelect} modalRef={modalMore}/>
         </Modalize>
       </ContainerPd>

@@ -1,9 +1,9 @@
-import { Iart } from '../../../types'
+import { IArt } from '../../../types'
 import { FC } from 'react'
 import { Container, ContainerInfo, LabelInfo, Info } from './style'
 
 interface Iprops {
-    art: Iart
+    art: IArt
 }
 
 const ModalFooterContent: FC<Iprops> = ({ art }) => {

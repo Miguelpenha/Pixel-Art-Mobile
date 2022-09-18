@@ -38,11 +38,11 @@ function Settings() {
                 </ContainerSwitch>
                 <Button onPress={async () => {
                     await AsyncStorage.removeItem('@pixelArt:theme')
-                    await AsyncStorage.removeItem('@pixelArt:favorites')
+                    await AsyncStorage.removeItem('@pixelArt:collection')
 
                     console.log(yellow('>> All data has been deleted'))
                     console.log(red('   >> @pixelArt:theme'))
-                    console.log(red('   >> @pixelArt:favorites'))
+                    console.log(red('   >> @pixelArt:collection'))
                     
                     await loadTheme()
 

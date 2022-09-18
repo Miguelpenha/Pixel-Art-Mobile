@@ -1,4 +1,4 @@
-import { Iart } from '../../../types'
+import { IArt } from '../../../types'
 import { MutableRefObject, FC, useState, useEffect } from 'react'
 import { Modalize } from 'react-native-modalize'
 import * as MediaLibrary from 'expo-media-library'
@@ -6,32 +6,34 @@ import * as FileSystem from 'expo-file-system'
 import Toast from 'react-native-toast-message'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
-import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption } from './style'
-import { TouchableOpacity } from 'react-native'
+import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption, Loading } from './style'
+import { TouchableOpacity, Platform } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
-import { getFavorites, removeFavorite, setFavorite } from '../../../favorites'
+import { getCollection, removeFromCollection, addToCollection } from '../../../collection'
+import { useTheme } from 'styled-components'
 
 interface Iprops {
-    art: Iart
+    art: IArt
     modalRef: MutableRefObject<Modalize>
 }
 
 const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
     const [status, requestPermission] = MediaLibrary.usePermissions()
-    const [IsFavorite, setIsFavorite] = useState<boolean>(null)
+    const [IsAddedInCollection, setIsAddedInCollection] = useState<boolean>(null)
+    const theme = useTheme()
 
     useEffect(() => {
-        async function checkFavorite() {
-            const favorites = await getFavorites()
+        async function checkIsAddedInCollection() {
+            const collection = await getCollection()
     
-            if (favorites && favorites.includes(art._id)) {
-                setIsFavorite(true)
+            if (collection && collection.includes(art._id)) {
+                setIsAddedInCollection(true)
             } else {
-                setIsFavorite(false)
+                setIsAddedInCollection(false)
             }
         }
 
-        checkFavorite().then()
+        checkIsAddedInCollection().then()
     }, [])
 
     async function download() {
@@ -113,61 +115,61 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         })
     }
 
-    async function favorite() {
+    async function AddToCollection() {
         modalRef.current.close()
         
-        await setFavorite(art._id)
+        await addToCollection(art._id)
 
-        setIsFavorite(true)
+        setIsAddedInCollection(true)
         
-        console.log(blue('>> Pixel art added to favorites'))
+        console.log(blue('>> Pixel art added to collection'))
         console.log(magenta(`   >> ID: ${art._id}`))
         console.log(magenta(`   >> Name: ${art.name}`))
 
         Toast.show({
             type: 'info',
-            text1: 'Arte salva em favoritas'
+            text1: 'Arte salva na coleção'
         })
     }
     
-    async function deleteFavorite() {
+    async function removeFromCollectionHandle() {
         modalRef.current.close()
         
-        await removeFavorite(art._id)
+        await removeFromCollection(art._id)
 
-        setIsFavorite(false)
+        setIsAddedInCollection(false)
         
-        console.log(blue('>> Pixel art removed from favorites'))
+        console.log(blue('>> Pixel art removed from collection'))
         console.log(magenta(`   >> ID: ${art._id}`))
         console.log(magenta(`   >> Name: ${art.name}`))
 
         Toast.show({
             type: 'error',
-            text1: 'Arte removida das favoritas'
+            text1: 'Arte removida da coleção'
         })
     }
 
-    if (IsFavorite != null) {
+    if (IsAddedInCollection != null) {
         return (
             <Container>
                 <MainOptions>
+                    <TouchableOpacity onPress={download}>
+                        <ContainerIconOptionMain select="success">
+                            <IconOptionMain select="success" name="file-download" size={30}/>
+                        </ContainerIconOptionMain>
+                        <TextOptionMain select="success">Baixar</TextOptionMain>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={copyLink}>
                         <ContainerIconOptionMain>
                             <IconOptionMain name="link" size={30}/>
                         </ContainerIconOptionMain>  
                         <TextOptionMain>Link</TextOptionMain>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={download}>
-                        <ContainerIconOptionMain>
-                            <IconOptionMain name="file-download" size={30}/>
-                        </ContainerIconOptionMain>  
-                        <TextOptionMain>Baixar</TextOptionMain>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={IsFavorite ? deleteFavorite : favorite}>
-                            <ContainerIconOptionMain>
-                                <IconOptionMain name="star" size={30}/>
-                            </ContainerIconOptionMain>  
-                            <TextOptionMain>{IsFavorite ? 'Desfavoritar' : 'Favoritos'}</TextOptionMain>
+                    <TouchableOpacity onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}>
+                            <ContainerIconOptionMain select={IsAddedInCollection ? 'error' : 'primary'}>
+                                <IconOptionMain select={IsAddedInCollection ? 'error' : 'primary'} name={`bookmark${IsAddedInCollection ? '' : '-outline'}`} size={30}/>
+                            </ContainerIconOptionMain>
+                            <TextOptionMain select={IsAddedInCollection ? 'error' : 'primary'}>{IsAddedInCollection ? 'Remover' : 'Adicionar'}</TextOptionMain>
                         </TouchableOpacity>
                 </MainOptions>
                 <Option onPress={copyImageLink}>
@@ -181,7 +183,7 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
             </Container>
         )
     } else {
-        return null
+        return <Loading color={theme.primary} size={Platform.OS === 'android' ? 50 : 'large'}/>
     }
 }
 

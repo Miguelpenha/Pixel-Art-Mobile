@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import { MaterialIcons } from '@expo/vector-icons'
+import { Itheme } from '../../../types'
 
 export const Container = styled.View`
     padding: 4%;
@@ -16,24 +17,36 @@ export const MainOptions = styled.View`
     border-bottom-color: ${props => props.theme.secondaryColor};
 `
 
-export const ContainerIconOptionMain = styled.View`
+interface IContainerIconOptionMain {
+    select?: (keyof Itheme) | null
+}
+
+export const ContainerIconOptionMain = styled.View<IContainerIconOptionMain>`
     align-self: center;
     border-radius: ${RFPercentage(6)}px;
-    border: ${RFPercentage(0.4)}px solid ${props => props.theme.secondaryColor}; 
+    border: ${RFPercentage(0.4)}px solid ${props => props.select ? props.theme[props.select] : props.theme.secondaryColor}; 
 `
 
-export const IconOptionMain = styled(MaterialIcons)`
+interface IIconOptionMain {
+    select?: (keyof Itheme) | null
+}
+
+export const IconOptionMain = styled(MaterialIcons)<IIconOptionMain>`
     padding: 2%;
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.select ? props.theme[props.select] : props.theme.color};
 `
 
-export const TextOptionMain = styled.Text`
+interface ITextOptionMain {
+    select?: (keyof Itheme) | null
+}
+
+export const TextOptionMain = styled.Text<ITextOptionMain>`
     margin-top: 8%;
     margin-bottom: 8%;
     font-weight: bold;
     text-align: center;
     font-size: ${RFPercentage(2.8)}px;
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.select ? props.theme[props.select] : props.theme.secondaryColor};
 `
 
 export const Option = styled.TouchableOpacity`
@@ -59,4 +72,8 @@ export const TextOption = styled.Text`
     margin-right: auto;
     font-size: ${RFPercentage(3.2)}px;
     color: ${props => props.theme.color};
+`
+
+export const Loading = styled.ActivityIndicator`
+    margin-top: 60%;
 `

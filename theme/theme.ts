@@ -8,9 +8,10 @@ export const dark: Itheme = {
     secondaryColor: '#c5c5c5',
     primary: '#0085FF',
     color: '#f2f2f2',
-    check: '#2fcc8d',
     likeColor: '#bf2431',
-    viewLastColor: '#006acc'
+    viewLastColor: '#006acc',
+    error: 'red',
+    success: '#28A645'
 }
 
 export const light: Itheme = {
@@ -21,9 +22,10 @@ export const light: Itheme = {
     secondaryColor: '#797979',
     primary: '#0085FF',
     color: '#ffffff',
-    check: '#4efdb7',
     likeColor: '#bf2431',
-    viewLastColor: '#006acc'
+    viewLastColor: '#006acc',
+    error: 'red',
+    success: '#28A645'
 }
 
 export default {
