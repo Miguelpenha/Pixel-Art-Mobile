@@ -7,14 +7,14 @@ import getArts from './getArts'
 import { ListRenderItemInfo, FlatList, RefreshControl, Platform } from 'react-native'
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
-import { ButtonCreate, IconButtonCreate, Loading } from './style'
-import Header from './Header'
+import HeaderBack from '../../components/HeaderBack'
+import { Loading } from './style'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
 import optionsModalize from '../../components/optionsModalize'
 
-export default function Home() {
+export default function Collection() {
   const [arts, setArts] = useState<IArt[]>(null)
   const [artSelect, setArtSelect] = useState<IArt>(null)
   const modalFooter = useRef<Modalize>(null)
@@ -58,20 +58,19 @@ export default function Home() {
   if (arts) {
     return (
       <ContainerPd>
-        <ButtonCreate onPress={() => navigation.navigate('CreateArt')}>
-            <IconButtonCreate name="add" size={35}/>
-        </ButtonCreate>
         <FlatList
           data={arts}
           renderItem={RenderArt}
-          ListHeaderComponent={Header}
+          ListHeaderComponent={() => (
+            <HeaderBack onClick={() => navigation.goBack()} title="Coleção"/>
+          )}
           keyExtractor={(item: IArt) => item._id}
           refreshControl={(
             <RefreshControl
               refreshing={refreshing}
               colors={[theme.primary]}
               onRefresh={onRefreshAction}
-              progressViewOffset={RFPercentage(13)}
+              progressViewOffset={RFPercentage(11.5)}
               progressBackgroundColor={theme.secondary}
             />
           )}

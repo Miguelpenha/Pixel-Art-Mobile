@@ -23,6 +23,7 @@ export type Inavigation = {
   Home: undefined
   Settings: undefined
   CreateArt: undefined
+  Collection: undefined
 }
 
 export interface Ipixel {

@@ -9,7 +9,7 @@ export const ButtonCreate = styled.TouchableOpacity`
     margin-right: 5%;
     align-self: flex-end;
     border-radius: ${RFPercentage(5)}px;
-    top: ${Dimensions.get('screen').scale*2.65}%;
+    top: ${Dimensions.get('screen').scale*2.10}%;
     background-color: ${props => props.theme.primary};
 `
 

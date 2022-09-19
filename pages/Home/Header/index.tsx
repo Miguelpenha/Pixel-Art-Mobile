@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { Container, ContainerSettings, Settings, Title } from './style'
+import { Container, ContainerSettings, Settings, ContainerCollection, Collection, Title } from './style'
 import { memo } from 'react'
 
 function Header() {
@@ -10,6 +10,9 @@ function Header() {
             <ContainerSettings onPress={() => navigation.navigate('Settings')}>
                 <Settings name="settings" size={40}/>
             </ContainerSettings>
+            <ContainerCollection onPress={() => navigation.navigate('Collection')}>
+                <Collection name="bookmark" size={40}/>
+            </ContainerCollection>
         </Container>
         <Title>Pixel Art</Title>
     </>
