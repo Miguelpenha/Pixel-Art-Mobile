@@ -8,11 +8,11 @@ import themesLightAndDark from './theme'
 interface IThemeContext {
     theme: Itheme
     themeName: IthemeType
-    mutateTheme: ImutateTheme
+    mutateTheme: IMutateTheme
     loadTheme: () => Promise<void>
 }
 
-type ImutateTheme = (mutateTheme?: IthemeType) => void
+type IMutateTheme = (mutateTheme?: IthemeType) => void
 
 export const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 

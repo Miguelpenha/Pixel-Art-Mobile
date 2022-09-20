@@ -18,7 +18,7 @@ function StackRouter() {
             <Screen name="Home" component={Home}/>
             <Screen name="Settings" component={Settings}/>
             <Screen name="CreateArt" component={CreateArt}/>
-            <Screen name="Collection" component={Collection}/>
+            <Screen name="Collection" component={Collection} initialParams={{ scrollTo: null }}/>
         </Navigator>
     )
 }

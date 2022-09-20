@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 export const ContainerSwitch = styled.View`
     margin-top: 2%;
+    margin-bottom: 2%;
     align-items: center;
     flex-direction: row;
     justify-content: center;
@@ -23,17 +24,19 @@ interface IButton {
 }
 
 export const Button = styled.TouchableOpacity<IButton>`
+    elevation: 8;
     padding: 3.5%;
-    margin-top: 8%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     align-self: center;
     align-items: center;
     flex-direction: row;
     border-radius: ${RFPercentage(2)}px;
-    background-color: ${props => props.loading ? '#c7dffe' : props.theme.primary};
+    background-color: ${props => props.loading ? '#c7dffe' : props.theme.backgroundColorSecondary};
 `
 
 export const IconButton = styled(MaterialIcons)`
-    color: ${props => props.theme.color};
+    color: ${props => props.theme.primary};
 `
 
 interface IIconUpdateButton {
@@ -53,20 +56,20 @@ export const TextButton = styled.Text`
     font-weight: bold;
     padding-right: 1%;
     font-size: ${RFPercentage(2.5)}px;
-    color: ${props => props.theme.color};
+    color: ${props => props.theme.primary};
 `
 
 export const Version = styled.Text`
     margin-top: auto;
-    align-self: center;
     margin-bottom: 2%;
+    align-self: center;
     font-size: ${RFPercentage(3.2)}px;
     color: ${props => props.theme.secondaryColor};
 `
 
 export const ContainerPoweredBy = styled.View`
-    align-items: center;
     margin-bottom: 5%;
+    align-items: center;
 `
 
 export const TextPoweredBy = styled.Text`

@@ -17,7 +17,7 @@ export const dark: Itheme = {
 export const light: Itheme = {
     name: 'light',
     backgroundColor: '#ffffff',
-    backgroundColorSecondary: '#bfbfbf',
+    backgroundColorSecondary: '#e4e4e4',
     secondary: '#cccccc',
     secondaryColor: '#797979',
     primary: '#0085FF',

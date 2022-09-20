@@ -3,6 +3,7 @@ import updateApp from './utils/updateApp'
 import AppLoading from 'expo-app-loading'
 import { green } from './utils/colorsLogs'
 import { ThemeProvider } from './theme'
+import { CollectionProvider } from './contexts/collectionContext'
 import Routes from './routes'
 import 'react-native-gesture-handler'
 
@@ -21,7 +22,9 @@ function App() {
 
     return (
       <ThemeProvider>
-        <Routes/>
+        <CollectionProvider>
+          <Routes/>
+        </CollectionProvider>
       </ThemeProvider>
     )
   }

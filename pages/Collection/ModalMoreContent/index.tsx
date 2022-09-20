@@ -9,7 +9,7 @@ import * as Clipboard from 'expo-clipboard'
 import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption, Loading } from './style'
 import { TouchableOpacity, Platform } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
-import { getCollection, removeFromCollection, addToCollection } from '../../../collection'
+import useCollection from '../../../contexts/collectionContext'
 import { useTheme } from 'styled-components'
 
 interface Iprops {
@@ -21,11 +21,10 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
     const [status, requestPermission] = MediaLibrary.usePermissions()
     const [IsAddedInCollection, setIsAddedInCollection] = useState<boolean>(null)
     const theme = useTheme()
+    const { collection, addArtToCollection, removeArtToCollection } = useCollection()
 
     useEffect(() => {
         async function checkIsAddedInCollection() {
-            const collection = await getCollection()
-    
             if (collection && collection.includes(art._id)) {
                 setIsAddedInCollection(true)
             } else {
@@ -34,7 +33,7 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         }
 
         checkIsAddedInCollection().then()
-    }, [])
+    }, [collection])
 
     async function download() {
         !status.granted && await requestPermission()
@@ -118,7 +117,7 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
     async function AddToCollection() {
         modalRef.current.close()
         
-        await addToCollection(art._id)
+        await addArtToCollection(art._id)
 
         setIsAddedInCollection(true)
         
@@ -135,7 +134,7 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
     async function removeFromCollectionHandle() {
         modalRef.current.close()
         
-        await removeFromCollection(art._id)
+        await removeArtToCollection(art._id)
 
         setIsAddedInCollection(false)
         

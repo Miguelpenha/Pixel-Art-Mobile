@@ -9,12 +9,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import checkUpdate from './checkUpdate'
 import Constants from 'expo-constants'
 import { blue, red, magenta, yellow } from '../../utils/colorsLogs'
+import Toast from 'react-native-toast-message'
+import useCollection from '../../contexts/collectionContext'
 
 function Settings() {
     const navigation = useNavigation()
     const { theme, themeName, mutateTheme, loadTheme } = useTheme()
     const [dark, setDark] = useState(themeName==='light' ? false : true)
     const [checkUpdating, setCheckUpdating] = useState(false)
+    const { loadCollection } = useCollection()
     
     return (
         <ContainerPd>
@@ -37,18 +40,27 @@ function Settings() {
                     />
                 </ContainerSwitch>
                 <Button onPress={async () => {
-                    await AsyncStorage.removeItem('@pixelArt:theme')
-                    await AsyncStorage.removeItem('@pixelArt:collection')
+                    AsyncStorage.removeItem('@pixelArt:theme').then(() => {
+                        AsyncStorage.removeItem('@pixelArt:collection').then(async () => {
+                            console.log(yellow('>> All data has been deleted'))
+                            console.log(red('   >> @pixelArt:theme'))
+                            console.log(red('   >> @pixelArt:collection'))
 
-                    console.log(yellow('>> All data has been deleted'))
-                    console.log(red('   >> @pixelArt:theme'))
-                    console.log(red('   >> @pixelArt:collection'))
-                    
-                    await loadTheme()
+                            Toast.show({
+                                type: 'error',
+                                text1: 'Dados Apagados'
+                            })
 
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: 'Home' }]
+                            await loadTheme()
+                            await loadCollection()
+                            
+                            navigation.reset({
+                                index: 0,
+                                routes: [{
+                                    name: 'Home'
+                                }]
+                            })
+                        })
                     })
                 }}>
                     <IconButton name="delete" size={30}/>

@@ -5,8 +5,8 @@ import { Itheme } from '../../../types'
 
 export const Container = styled.View`
     padding: 4%;
-    margin-top: 5%;
-    padding-bottom: ${RFPercentage(15)}px;
+    padding-top: 8%;
+    padding-bottom: ${RFPercentage(42.8)}px;
 `
 
 export const MainOptions = styled.View`
