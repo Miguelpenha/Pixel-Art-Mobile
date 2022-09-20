@@ -6,7 +6,7 @@ import * as FileSystem from 'expo-file-system'
 import Toast from 'react-native-toast-message'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
-import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, TextOptionMain, Option, IconOption, TextOption, Loading } from './style'
+import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, Option, IconOption, TextOption, Loading } from './style'
 import { TouchableOpacity, Platform } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
 import useCollection from '../../../contexts/collectionContext'
@@ -152,24 +152,22 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         return (
             <Container>
                 <MainOptions>
-                    <TouchableOpacity onPress={download}>
-                        <ContainerIconOptionMain select="success">
-                            <IconOptionMain select="success" name="file-download" size={30}/>
-                        </ContainerIconOptionMain>
-                        <TextOptionMain select="success">Baixar</TextOptionMain>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={copyLink}>
-                        <ContainerIconOptionMain>
-                            <IconOptionMain name="link" size={30}/>
-                        </ContainerIconOptionMain>  
-                        <TextOptionMain>Link</TextOptionMain>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}>
-                            <ContainerIconOptionMain select={IsAddedInCollection ? 'error' : 'primary'}>
-                                <IconOptionMain select={IsAddedInCollection ? 'error' : 'primary'} name={`bookmark${IsAddedInCollection ? '' : '-outline'}`} size={30}/>
-                            </ContainerIconOptionMain>
-                            <TextOptionMain select={IsAddedInCollection ? 'error' : 'primary'}>{IsAddedInCollection ? 'Remover' : 'Adicionar'}</TextOptionMain>
-                        </TouchableOpacity>
+                    <ContainerIconOptionMain select="success" onPress={download}>
+                        <IconOptionMain select="success" name="file-download" size={30}/>
+                    </ContainerIconOptionMain>
+                    <ContainerIconOptionMain onPress={copyLink}>
+                        <IconOptionMain name="link" size={30}/>
+                    </ContainerIconOptionMain>
+                    <ContainerIconOptionMain
+                        select={IsAddedInCollection ? 'error' : 'primary'}
+                        onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}
+                    >
+                        <IconOptionMain
+                            size={30}
+                            select={IsAddedInCollection ? 'error' : 'primary'}
+                            name={`bookmark${IsAddedInCollection ? '' : '-outline'}`}
+                        />
+                    </ContainerIconOptionMain>
                 </MainOptions>
                 <Option onPress={copyImageLink}>
                     <IconOption name="image" size={28}/>
