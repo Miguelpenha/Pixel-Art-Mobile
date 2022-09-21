@@ -7,12 +7,13 @@ import getArts from './getArts'
 import { ListRenderItemInfo, FlatList, RefreshControl, Platform } from 'react-native'
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
-import { ButtonCreate, IconButtonCreate, Loading } from './style'
+import { ContainerButtonCreate, ButtonCreate, IconButtonCreate, Loading } from './style'
 import Header from './Header'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
 import optionsModalize from '../../components/optionsModalize'
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
 export default function Home() {
   const [arts, setArts] = useState<IArt[]>(null)
@@ -22,6 +23,8 @@ export default function Home() {
   const [refreshing, setRefreshing] = useState(false)
   const navigation = useNavigation()
   const theme = useTheme()
+  const pressed = useSharedValue(1)
+  const pressedIcon = useSharedValue(1)
   
   useEffect(() => {
     getArts(setArts).then()
@@ -54,13 +57,62 @@ export default function Home() {
 
     setRefreshing(false)
   }
+
+  const styleAnimationOptionMain = useAnimatedStyle(() => ({
+      transform: [{ scale: pressed.value }]
+  }), [])
+
+  const styleAnimationIconOptionMain = useAnimatedStyle(() => ({
+      transform: [{ scale: pressedIcon.value }]
+  }), [])
   
   if (arts) {
     return (
       <ContainerPd>
-        <ButtonCreate onPress={() => navigation.navigate('CreateArt')}>
-            <IconButtonCreate name="add" size={35}/>
-        </ButtonCreate>
+        <Animated.View style={[styleAnimationOptionMain, ContainerButtonCreate]}>
+          <ButtonCreate
+            onPress={() => {
+              pressed.value = withTiming(0.8, {
+                  duration: 100
+              })
+
+              pressedIcon.value = withTiming(0.8, {
+                  duration: 200
+              })
+              
+              setTimeout(() => {
+                navigation.navigate('CreateArt')
+
+                pressed.value = withTiming(1, {
+                  duration: 100
+                })
+
+                pressedIcon.value = withTiming(1, {
+                    duration: 200
+                })
+              }, 200)
+            }}
+            activeOpacity={0.5}
+            onPressIn={() => {
+                pressed.value = withTiming(0.8)
+
+                pressedIcon.value = withTiming(0.8, {
+                    duration: 900
+                })
+            }}
+            onPressOut={() => {
+                pressed.value = withTiming(1)
+
+                pressedIcon.value = withTiming(1, {
+                    duration: 900
+                })
+            }}
+          >
+            <Animated.View style={styleAnimationIconOptionMain}>
+              <IconButtonCreate name="add" size={35}/>
+            </Animated.View>
+          </ButtonCreate>
+        </Animated.View>
         <FlatList
           data={arts}
           renderItem={RenderArt}

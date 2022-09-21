@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useFocusEffect } from '@react-navigation/native'
 import { Container, Header, Name, ContainerIconMore, IconMore, ImageArt, Footer, ContainerInfoButton, IconInfoButton, ListContainerInfo, ContainerInfo, IconInfo, TextInfo } from './style'
 import { styleAnimationLike, styleAnimationCollection } from './animations'
-import Animated from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated'
 import useCollection from '../../../contexts/collectionContext'
 import { blue, magenta } from '../../../utils/colorsLogs'
 import Toast from 'react-native-toast-message'
@@ -20,6 +20,16 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
     const { collection, addArtToCollection, removeArtToCollection } = useCollection()
     const [like, setLike] = useState<boolean>(null)
     const [isAddedInCollection, setIsAddedInCollection] = useState<boolean>(null)
+    const pressed = useSharedValue(1)
+    const pressedRotation = useSharedValue(0)
+
+    const styleAnimationIconMore = useAnimatedStyle(() => ({
+        transform: [
+            { scale: pressed.value },
+            { rotate: `${pressedRotation.value*20}deg` },
+            { translateX: pressedRotation.value/2, translateY: pressedRotation.value/2 }
+        ]
+    }))
 
     useFocusEffect(
         useCallback(() => {
@@ -35,8 +45,46 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
         <Container {...props}>
             <Header>
                 <Name>{art.name}</Name>
-                <ContainerIconMore onPress={onClickMore}>
-                    <IconMore name="more-vert" size={30}/>
+                <ContainerIconMore
+                    onPress={() => {
+                        pressed.value = withTiming(0.8, {
+                            duration: 100
+                        })
+
+                        pressedRotation.value = withSequence(
+                            withTiming(1, {
+                                duration: 200
+                            }),
+                            withTiming(-1, {
+                                duration: 200
+                            })
+                        )
+                        
+                        setTimeout(() => {
+                            onClickMore()
+
+                            pressed.value = withTiming(1, {
+                                duration: 100
+                            })
+
+                            pressedRotation.value = withTiming(0, {
+                                duration: 100
+                            })
+                        }, 100)
+                    }}
+                    activeOpacity={0.5}
+                    onPressOut={() => {
+                        pressed.value = withTiming(1)
+                        pressedRotation.value = withTiming(0)
+                    }}
+                    onPressIn={() => {
+                        pressed.value = withTiming(0.8)
+                        pressedRotation.value = withSequence(withTiming(1), withTiming(-1))
+                    }}
+                >
+                    <Animated.View style={styleAnimationIconMore}>
+                        <IconMore name="more-vert" size={30}/>
+                    </Animated.View>
                 </ContainerIconMore>
             </Header>
             <ImageArt
