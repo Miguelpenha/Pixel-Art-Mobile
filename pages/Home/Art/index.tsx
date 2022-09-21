@@ -71,7 +71,7 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
                             pressedRotation.value = withTiming(0, {
                                 duration: 100
                             })
-                        }, 150)
+                        }, 250)
                     }}
                     activeOpacity={0.5}
                     onPressOut={() => {
