@@ -27,7 +27,8 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
         transform: [
             { scale: pressed.value },
             { rotate: `${pressedRotation.value*20}deg` },
-            { translateX: pressedRotation.value/2, translateY: pressedRotation.value/2 }
+            { translateX: pressedRotation.value/2 },
+            { translateY: pressedRotation.value/2 }
         ]
     }))
 
@@ -48,15 +49,15 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
                 <ContainerIconMore
                     onPress={() => {
                         pressed.value = withTiming(0.8, {
-                            duration: 100
+                            duration: 150
                         })
 
                         pressedRotation.value = withSequence(
                             withTiming(1, {
-                                duration: 200
+                                duration: 150
                             }),
                             withTiming(-1, {
-                                duration: 200
+                                duration: 150
                             })
                         )
                         
@@ -70,7 +71,7 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
                             pressedRotation.value = withTiming(0, {
                                 duration: 100
                             })
-                        }, 100)
+                        }, 150)
                     }}
                     activeOpacity={0.5}
                     onPressOut={() => {
