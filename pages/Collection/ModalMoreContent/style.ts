@@ -17,25 +17,6 @@ export const MainOptions = styled.View`
     border-bottom-color: ${props => props.theme.secondaryColor};
 `
 
-interface IContainerIconOptionMain {
-    select?: (keyof Itheme) | null
-}
-
-export const ContainerIconOptionMain = styled.TouchableOpacity<IContainerIconOptionMain>`
-    align-self: center;
-    border-radius: ${RFPercentage(6)}px;
-    border: ${RFPercentage(0.4)}px solid ${props => props.select ? props.theme[props.select] : props.theme.secondaryColor}; 
-`
-
-interface IIconOptionMain {
-    select?: (keyof Itheme) | null
-}
-
-export const IconOptionMain = styled(MaterialIcons)<IIconOptionMain>`
-    padding: 2%;
-    color: ${props => props.select ? props.theme[props.select] : props.theme.secondaryColor};
-`
-
 export const Option = styled.TouchableOpacity`
     padding: 4%;
     margin-top: 8%;

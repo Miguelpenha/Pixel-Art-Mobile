@@ -70,6 +70,7 @@ const Art: FC<Iprops> = ({ art, onClickMore, onClickFooter, ...props }) => {
                                 text1: 'Arte salva na coleção',
                                 onPress() {
                                     Toast.hide()
+                                    
                                     navigation.navigate('Collection', {
                                         scrollTo: art._id
                                     })

@@ -6,11 +6,13 @@ import * as FileSystem from 'expo-file-system'
 import Toast from 'react-native-toast-message'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
-import { Container, MainOptions, ContainerIconOptionMain, IconOptionMain, Option, IconOption, TextOption, Loading } from './style'
-import { TouchableOpacity, Platform } from 'react-native'
+import { Container, MainOptions, Option, IconOption, TextOption, Loading } from './style'
+import { Platform } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
 import useCollection from '../../../contexts/collectionContext'
 import { useTheme } from 'styled-components'
+import { useNavigation } from '@react-navigation/native'
+import AnimatedIconOptionMenu from './AnimatedIconOptionMenu'
 
 interface Iprops {
     art: IArt
@@ -18,9 +20,10 @@ interface Iprops {
 }
 
 const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
+    const theme = useTheme()
+    const navigation = useNavigation()
     const [status, requestPermission] = MediaLibrary.usePermissions()
     const [IsAddedInCollection, setIsAddedInCollection] = useState<boolean>(null)
-    const theme = useTheme()
     const { collection, addArtToCollection, removeArtToCollection } = useCollection()
 
     useEffect(() => {
@@ -127,7 +130,14 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
 
         Toast.show({
             type: 'info',
-            text1: 'Arte salva na coleção'
+            text1: 'Arte salva na coleção',
+            onPress() {
+                Toast.hide()
+                
+                navigation.navigate('Collection', {
+                    scrollTo: art._id
+                })
+            }
         })
     }
     
@@ -152,22 +162,19 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         return (
             <Container>
                 <MainOptions>
-                    <ContainerIconOptionMain select="success" onPress={download}>
-                        <IconOptionMain select="success" name="file-download" size={30}/>
-                    </ContainerIconOptionMain>
-                    <ContainerIconOptionMain onPress={copyLink}>
-                        <IconOptionMain name="link" size={30}/>
-                    </ContainerIconOptionMain>
-                    <ContainerIconOptionMain
-                        select={IsAddedInCollection ? 'error' : 'primary'}
+                    <AnimatedIconOptionMenu
+                        color="success"
+                        onPress={download}
+                        colorIcon="success"
+                        nameIcon="file-download"
+                    />
+                    <AnimatedIconOptionMenu nameIcon="link" onPress={copyLink}/>
+                    <AnimatedIconOptionMenu
+                        color={IsAddedInCollection ? 'error' : 'primary'}
+                        colorIcon={IsAddedInCollection ? 'error' : 'primary'}
+                        nameIcon={`bookmark${IsAddedInCollection ? '' : '-outline'}`}
                         onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}
-                    >
-                        <IconOptionMain
-                            size={30}
-                            select={IsAddedInCollection ? 'error' : 'primary'}
-                            name={`bookmark${IsAddedInCollection ? '' : '-outline'}`}
-                        />
-                    </ContainerIconOptionMain>
+                    />
                 </MainOptions>
                 <Option onPress={copyImageLink}>
                     <IconOption name="image" size={28}/>
