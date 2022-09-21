@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { RFPercentage } from 'react-native-responsive-fontsize'
+import Animated from 'react-native-reanimated'
 import { MaterialIcons } from '@expo/vector-icons'
-import { Itheme } from '../../../types'
 
 export const Container = styled.View`
     padding: 4%;
@@ -9,7 +9,7 @@ export const Container = styled.View`
     padding-bottom: ${RFPercentage(42.8)}px;
 `
 
-export const MainOptions = styled.View`
+export const MainOptions = styled(Animated.View)`
     padding-bottom: 6%;
     flex-direction: row;
     justify-content: space-around;

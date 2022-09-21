@@ -13,6 +13,8 @@ import useCollection from '../../../contexts/collectionContext'
 import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
 import AnimatedIconOptionMenu from './AnimatedIconOptionMenu'
+import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated'
+import { RFPercentage } from 'react-native-responsive-fontsize'
 
 interface Iprops {
     art: IArt
@@ -22,6 +24,9 @@ interface Iprops {
 const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
     const theme = useTheme()
     const navigation = useNavigation()
+    const borderWidthAnimation = useSharedValue(0)
+    const optionFromBottomAnimation = useSharedValue(RFPercentage(35))
+    const optionOpacityAnimation = useSharedValue(0)
     const [status, requestPermission] = MediaLibrary.usePermissions()
     const [IsAddedInCollection, setIsAddedInCollection] = useState<boolean>(null)
     const { collection, addArtToCollection, removeArtToCollection } = useCollection()
@@ -158,10 +163,33 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
         })
     }
 
+    const styleAnimationMainOptions = useAnimatedStyle(() => ({
+        borderBottomWidth: borderWidthAnimation.value
+    }), [])
+
+    const styleAnimationOptionFromBottom = useAnimatedStyle(() => ({
+        transform: [{ translateY: optionFromBottomAnimation.value }],
+        opacity: optionOpacityAnimation.value
+    }), [])
+
+    useEffect(() => {
+        borderWidthAnimation.value = withTiming(RFPercentage(0.4), {
+            duration: 1200
+        })
+
+        optionFromBottomAnimation.value = withTiming(0, {
+            duration: 800
+        })
+
+        optionOpacityAnimation.value = withTiming(1, {
+            duration: 800
+        })
+    }, [])
+
     if (IsAddedInCollection != null) {
         return (
             <Container>
-                <MainOptions>
+                <MainOptions style={styleAnimationMainOptions}>
                     <AnimatedIconOptionMenu
                         color="success"
                         onPress={download}
@@ -176,14 +204,18 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
                         onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}
                     />
                 </MainOptions>
-                <Option onPress={copyImageLink}>
-                    <IconOption name="image" size={28}/>
-                    <TextOption>Link da foto</TextOption>
-                </Option>
-                <Option onPress={share}>
-                    <IconOption name="share" size={28}/>
-                    <TextOption>Compartilhar</TextOption>
-                </Option>
+                <Animated.View style={styleAnimationOptionFromBottom}>
+                    <Option onPress={copyImageLink}>
+                        <IconOption name="image" size={28}/>
+                        <TextOption>Link da foto</TextOption>
+                    </Option>
+                </Animated.View>
+                <Animated.View style={styleAnimationOptionFromBottom}>
+                    <Option onPress={share}>
+                        <IconOption name="share" size={28}/>
+                        <TextOption>Compartilhar</TextOption>
+                    </Option>
+                </Animated.View>
             </Container>
         )
     } else {
