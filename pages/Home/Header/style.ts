@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
+import Animated from 'react-native-reanimated'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 
 export const Container = styled.View`
@@ -26,7 +27,7 @@ export const Collection = styled(MaterialIcons)`
     color: ${props => props.theme.primary};
 `
 
-export const Title = styled.Text`
+export const Title = styled(Animated.Text)`
     margin-top: 18%;
     margin-bottom: 2%;
     font-weight: bold;

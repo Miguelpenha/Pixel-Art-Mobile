@@ -1,15 +1,30 @@
 import { useNavigation } from '@react-navigation/native'
 import Animation, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import { Container, ContainerSettings, Settings, ContainerCollection, Collection, Title } from './style'
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 
 function Header() {
     const navigation = useNavigation()
-    const pressed = useSharedValue(1)
+    const pressed = useSharedValue(0.5)
+    const show = useSharedValue(0.4)
+    const showScale = useSharedValue(0.6)
 
     const styleAnimationContainerCollection = useAnimatedStyle(() => ({
         transform: [{ scale: pressed.value }]
     }))
+
+    const styleAnimationTitle = useAnimatedStyle(() => ({
+        opacity: show.value,
+        transform: [{ scale: showScale.value }]
+    }))
+
+    useEffect(() => {
+        setTimeout(() => {
+            pressed.value = withTiming(1)
+            show.value = withTiming(1)
+            showScale.value = withTiming(1)
+        }, 500)
+    }, [])
 
     return <>
         <Container>
@@ -39,7 +54,7 @@ function Header() {
                 </Animation.View>
             </ContainerCollection>
         </Container>
-        <Title>Pixel Art</Title>
+        <Title style={styleAnimationTitle}>Pixel Art</Title>
     </>
 }
 

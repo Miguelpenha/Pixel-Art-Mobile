@@ -23,8 +23,8 @@ export default function Home() {
   const [refreshing, setRefreshing] = useState(false)
   const navigation = useNavigation()
   const theme = useTheme()
-  const pressed = useSharedValue(1)
-  const pressedIcon = useSharedValue(1)
+  const pressed = useSharedValue(0.5)
+  const pressedIcon = useSharedValue(0.5)
   
   useEffect(() => {
     getArts(setArts).then()
@@ -65,6 +65,16 @@ export default function Home() {
   const styleAnimationIconOptionMain = useAnimatedStyle(() => ({
       transform: [{ scale: pressedIcon.value }]
   }), [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      pressed.value = withTiming(1)
+  
+      pressedIcon.value = withTiming(1, {
+          duration: 600
+      })
+    }, 4500)
+  }, [])
   
   if (arts) {
     return (
@@ -73,11 +83,11 @@ export default function Home() {
           <ButtonCreate
             onPress={() => {
               pressed.value = withTiming(0.8, {
-                  duration: 100
+                duration: 100
               })
 
               pressedIcon.value = withTiming(0.8, {
-                  duration: 200
+                duration: 200
               })
               
               setTimeout(() => {

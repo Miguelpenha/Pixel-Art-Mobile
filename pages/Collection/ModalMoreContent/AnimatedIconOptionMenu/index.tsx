@@ -12,11 +12,12 @@ interface Iprops {
 }
 
 const AnimatedIconOptionMenu: FC<Iprops> = ({ color, onPress, colorIcon, nameIcon }) => {
-    const pressed = useSharedValue(0.8)
-    const pressedIcon = useSharedValue(0.8)
+    const pressed = useSharedValue(0.6)
+    const pressedIcon = useSharedValue(0.6)
 
     const styleAnimationOptionMain = useAnimatedStyle(() => ({
-        transform: [{ scale: pressed.value }]
+        transform: [{ scale: pressed.value }],
+        opacity: pressed.value
     }), [])
 
     const styleAnimationIconOptionMain = useAnimatedStyle(() => ({
