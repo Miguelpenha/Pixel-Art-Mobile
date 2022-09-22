@@ -6,14 +6,15 @@ import * as FileSystem from 'expo-file-system'
 import Toast from 'react-native-toast-message'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
-import { Container, MainOptions, Option, IconOption, TextOption, Loading } from './style'
+import { Container, MainOptions, Loading } from './style'
 import { Platform } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
 import useCollection from '../../../contexts/collectionContext'
 import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
-import AnimatedIconOptionMenu from './AnimatedIconOptionMenu'
-import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated'
+import AnimatedIconOptionMenu from './animations/AnimatedIconOptionMenu'
+import AnimatedOption from './animations/AnimatedOption'
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 
 interface Iprops {
@@ -204,18 +205,10 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
                         onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}
                     />
                 </MainOptions>
-                <Animated.View style={styleAnimationOptionFromBottom}>
-                    <Option onPress={copyImageLink}>
-                        <IconOption name="image" size={28}/>
-                        <TextOption>Link da foto</TextOption>
-                    </Option>
-                </Animated.View>
-                <Animated.View style={styleAnimationOptionFromBottom}>
-                    <Option onPress={share}>
-                        <IconOption name="share" size={28}/>
-                        <TextOption>Compartilhar</TextOption>
-                    </Option>
-                </Animated.View>
+                <AnimatedOption iconName="image" onPress={copyImageLink} animation={styleAnimationOptionFromBottom}>Link da foto</AnimatedOption>
+                <AnimatedOption iconName="share"
+                onPress={share}
+                animation={styleAnimationOptionFromBottom}>Compartilhar</AnimatedOption>
             </Container>
         )
     } else {

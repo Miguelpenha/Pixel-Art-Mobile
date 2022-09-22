@@ -1,4 +1,4 @@
-import { Itheme } from '../../../../types'
+import { Itheme } from '../../../../../types'
 import { FC, useEffect, memo } from 'react'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import { ContainerIconOptionMain, IconOptionMain } from './style'

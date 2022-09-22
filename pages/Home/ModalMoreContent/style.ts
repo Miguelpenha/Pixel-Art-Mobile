@@ -17,31 +17,6 @@ export const MainOptions = styled(Animated.View)`
     border-bottom-color: ${props => props.theme.secondaryColor};
 `
 
-export const Option = styled.TouchableOpacity`
-    padding: 4%;
-    margin-top: 8%;
-    align-self: center;
-    flex-direction: row;
-    border-radius: ${RFPercentage(2)}px;
-    background-color: ${props => props.theme.backgroundColorSecondary};
-`
-
-export const IconOption = styled(MaterialIcons)`
-    padding-right: 2%;
-    margin-right: auto;
-    align-self: center;
-    color: ${props => props.theme.primary};
-`
-
-export const TextOption = styled.Text`
-    padding-right: 2%;
-    margin-left: auto;
-    align-self: center;
-    margin-right: auto;
-    font-size: ${RFPercentage(3.2)}px;
-    color: ${props => props.theme.primary};
-`
-
 export const Loading = styled.ActivityIndicator`
     margin-top: 60%;
 `

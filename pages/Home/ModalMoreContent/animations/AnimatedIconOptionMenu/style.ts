@@ -1,4 +1,4 @@
-import { Itheme } from '../../../../types'
+import { Itheme } from '../../../../../types'
 import styled from 'styled-components/native'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import { MaterialIcons } from '@expo/vector-icons'
