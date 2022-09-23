@@ -12,6 +12,7 @@ import { MessageNotFound, Loading } from './style'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
+import ModalQRCode from './ModalQRCode'
 import optionsModalize from '../../components/optionsModalize'
 import useCollection from '../../contexts/collectionContext'
 
@@ -24,6 +25,7 @@ export default function Collection() {
   const [artSelect, setArtSelect] = useState<IArt>(null)
   const modalFooter = useRef<Modalize>(null)
   const modalMore = useRef<Modalize>(null)
+  const modalQRCode = useRef<Modalize>(null)
   const [refreshing, setRefreshing] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const navigation = useNavigation()
@@ -107,8 +109,14 @@ export default function Collection() {
         <Modalize {...optionsModalize(theme, 50, 20)} ref={modalFooter}>
           <ModalFooterContent art={artSelect}/>
         </Modalize>
-        <Modalize {...optionsModalize(theme, 90, 50)} ref={modalMore}>
-          <ModalMoreContent art={artSelect} modalRef={modalMore}/>
+        <Modalize {...optionsModalize(theme, 90, 60)} ref={modalMore}>
+          <ModalMoreContent art={artSelect} modalRef={modalMore} onQRCode={() => {
+            modalQRCode.current.open()
+            modalMore.current.close()
+          }}/>
+        </Modalize>
+        <Modalize {...optionsModalize(theme, 90, 48)} ref={modalQRCode}>
+          <ModalQRCode art={artSelect}/>
         </Modalize>
       </ContainerPd>
     )

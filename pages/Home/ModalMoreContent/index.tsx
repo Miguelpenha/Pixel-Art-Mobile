@@ -19,10 +19,11 @@ import { RFPercentage } from 'react-native-responsive-fontsize'
 
 interface Iprops {
     art: IArt
+    onQRCode: () => void
     modalRef: MutableRefObject<Modalize>
 }
 
-const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
+const ModalMoreContent: FC<Iprops> = ({ art, modalRef, onQRCode }) => {
     const theme = useTheme()
     const navigation = useNavigation()
     const borderWidthAnimation = useSharedValue(0)
@@ -206,9 +207,8 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef }) => {
                     />
                 </MainOptions>
                 <AnimatedOption iconName="image" onPress={copyImageLink} animation={styleAnimationOptionFromBottom}>Link da foto</AnimatedOption>
-                <AnimatedOption iconName="share"
-                onPress={share}
-                animation={styleAnimationOptionFromBottom}>Compartilhar</AnimatedOption>
+                <AnimatedOption iconName="share" onPress={share} animation={styleAnimationOptionFromBottom}>Compartilhar</AnimatedOption>
+                <AnimatedOption iconName="qr-code-scanner" onPress={onQRCode} animation={styleAnimationOptionFromBottom}>Gerar QRCode</AnimatedOption>
             </Container>
         )
     } else {
