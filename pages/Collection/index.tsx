@@ -8,7 +8,7 @@ import { ListRenderItemInfo, FlatList, RefreshControl, Platform } from 'react-na
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
-import { Loading } from './style'
+import { MessageNotFound, Loading } from './style'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalFooterContent from './ModalFooterContent'
 import ModalMoreContent from './ModalMoreContent'
@@ -88,9 +88,10 @@ export default function Collection() {
           data={arts}
           ref={refArts}
           renderItem={RenderArt}
-          ListHeaderComponent={() => (
+          ListHeaderComponent={() => <>
             <HeaderBack onClick={() => navigation.goBack()} title="Coleção"/>
-          )}
+            {collection.length < 1 && <MessageNotFound>Não há artes na sua coleção &#x1F615;</MessageNotFound>}
+          </>}
           getItemLayout={(data, index) => ({length: RFPercentage(65), offset: RFPercentage(65)*index, index})}
           keyExtractor={(item: IArt) => item._id}
           refreshControl={(

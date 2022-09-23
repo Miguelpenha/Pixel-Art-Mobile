@@ -150,8 +150,9 @@ export const ContainerColorPicker = styled.View`
 `
 
 export const ButtonSubmitColor = styled.TouchableOpacity`
-    padding: 4% 8%;
-    margin-top: 12%;
+    width: 50%;
+    padding: 4% 0%;
+    margin-top: 20%;
     align-self: center;
     border-radius: ${RFPercentage(2)}px;
     background-color: ${props => props.theme.primary};
@@ -159,6 +160,7 @@ export const ButtonSubmitColor = styled.TouchableOpacity`
 
 export const TextButtonSubmitColor = styled.Text`
     font-weight: bold;
-    font-size: ${RFPercentage(4)}px;
+    align-self: center;
+    font-size: ${RFPercentage(3)}px;
     color: ${props => props.theme.color};
 `
