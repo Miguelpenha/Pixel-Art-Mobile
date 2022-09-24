@@ -1,7 +1,7 @@
 import { Ipixel } from '../../../types'
 import { Dispatch, SetStateAction, FC, useEffect, memo } from 'react'
 import { useTheme } from 'styled-components'
-import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, withSequence } from 'react-native-reanimated'
 import { Container } from './style'
 
 interface Iprops {
@@ -13,19 +13,18 @@ interface Iprops {
 }
 
 const Pixel: FC<Iprops> = ({ pixel, pixelsCount, colorSelect, pixels, setPixels }) => {
+    const scale = useSharedValue(0.8)
     const theme = useTheme()
     const pixelSizes = Math.sqrt(pixelsCount)
-    const scale = useSharedValue(0.85)
     
     const styleAnimation = useAnimatedStyle(() => ({
         transform: [{ scale: scale.value }]
-    }), [scale])
+    }), [])
 
     useEffect(() => {
-        scale.value = withSequence(
-            withSpring(0.85),
-            withSpring(1)
-        )
+        scale.value = withTiming(1, {
+            duration: 500
+        })
     }, [])
 
     return (
