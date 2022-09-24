@@ -67,6 +67,7 @@ export const ButtonCreate = styled.TouchableOpacity`
 export const TextButtonCreate = styled.Text`
     font-weight: bold;
     margin-left: auto;
+    align-self: center;
     font-size: ${RFPercentage(3.8)}px;
     color: ${props => props.theme.color};
 `

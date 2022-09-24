@@ -3,7 +3,6 @@ import { IArt } from '../../types'
 import { Modalize } from 'react-native-modalize'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
-import getArts from './getArts'
 import { ListRenderItemInfo, FlatList, RefreshControl, Platform } from 'react-native'
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
@@ -15,9 +14,10 @@ import ModalMoreContent from './ModalMoreContent'
 import ModalQRCode from './ModalQRCode'
 import optionsModalize from '../../components/optionsModalize'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import api from '../../api'
 
 export default function Home() {
-  const [arts, setArts] = useState<IArt[]>(null)
+  const { data: arts, mutate: mutateArts } = api.get<IArt[]>('/arts/find')
   const [artSelect, setArtSelect] = useState<IArt>(null)
   const modalFooter = useRef<Modalize>(null)
   const modalMore = useRef<Modalize>(null)
@@ -29,11 +29,11 @@ export default function Home() {
   const pressedIcon = useSharedValue(1)
   
   useEffect(() => {
-    getArts(setArts).then()
+    mutateArts()
   }, [])
 
   useFocusEffect(() => {
-    getArts(setArts).then()
+    mutateArts()
   })
 
   function RenderArt({ item }: ListRenderItemInfo<IArt>) {
@@ -55,7 +55,7 @@ export default function Home() {
   async function onRefreshAction() {
     setRefreshing(true)
 
-    await getArts(setArts)
+    mutateArts()
 
     setRefreshing(false)
   }

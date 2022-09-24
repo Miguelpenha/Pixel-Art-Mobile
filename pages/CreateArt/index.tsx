@@ -26,7 +26,7 @@ import {
 import Toast from 'react-native-toast-message'
 import ContainerPd from '../../components/ContainerPd'
 import Pixel from './Pixel'
-import api from '../../api'
+import api from '../../api/base'
 import { IArt } from '../../types'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ColorPicker from 'react-native-wheel-color-picker'

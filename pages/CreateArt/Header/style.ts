@@ -45,7 +45,7 @@ interface IColorButtonColor {
 }
 
 export const ColorButtonColor = styled.Text<IColorButtonColor>`
-    width: 20%;
+    width: ${RFPercentage(3.2)}px;
     border-radius: ${RFPercentage(0.5)}px;
     background-color: ${props => props.color};
     border: 1px solid ${props => props.theme.color};

@@ -3,7 +3,6 @@ import { IArt } from '../../types'
 import { Modalize } from 'react-native-modalize'
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
-import getArts from './getArts'
 import { ListRenderItemInfo, FlatList, RefreshControl, Platform } from 'react-native'
 import Art from './Art'
 import ContainerPd from '../../components/ContainerPd'
@@ -15,13 +14,14 @@ import ModalMoreContent from './ModalMoreContent'
 import ModalQRCode from './ModalQRCode'
 import optionsModalize from '../../components/optionsModalize'
 import useCollection from '../../contexts/collectionContext'
+import api from '../../api'
 
 interface IParams {
   scrollTo: string
 }
 
 export default function Collection() {
-  const [arts, setArts] = useState<IArt[]>(null)
+  const { data: arts, mutate: mutateArts } = api.get<IArt[]>('/arts/find')
   const [artSelect, setArtSelect] = useState<IArt>(null)
   const modalFooter = useRef<Modalize>(null)
   const modalMore = useRef<Modalize>(null)
@@ -35,7 +35,7 @@ export default function Collection() {
   const refArts = useRef<FlatList>(null)
 
   useEffect(() => {
-    getArts(setArts).then()
+    mutateArts()
   }, [])
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Collection() {
   }, [arts, scrollTo])
 
   useFocusEffect(() => {
-    getArts(setArts).then()
+    mutateArts()
   })
 
   function RenderArt({ item }: ListRenderItemInfo<IArt>) {
@@ -78,8 +78,8 @@ export default function Collection() {
   async function onRefreshAction() {
     setRefreshing(true)
 
-    await getArts(setArts)
-
+    mutateArts()
+    
     setRefreshing(false)
   }
   
