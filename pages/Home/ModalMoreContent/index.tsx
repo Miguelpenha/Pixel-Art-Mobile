@@ -6,7 +6,7 @@ import * as FileSystem from 'expo-file-system'
 import Toast from 'react-native-toast-message'
 import * as Sharing from 'expo-sharing'
 import * as Clipboard from 'expo-clipboard'
-import { Container, MainOptions, Loading } from './style'
+import { Container, MainOptions, Options, Loading } from './style'
 import { Platform } from 'react-native'
 import { blue, green, magenta } from '../../../utils/colorsLogs'
 import useCollection from '../../../contexts/collectionContext'
@@ -169,7 +169,7 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef, onQRCode }) => {
         borderBottomWidth: borderWidthAnimation.value
     }), [])
 
-    const styleAnimationOptionFromBottom = useAnimatedStyle(() => ({
+    const styleAnimationOptionsFromBottom = useAnimatedStyle(() => ({
         transform: [{ translateY: optionFromBottomAnimation.value }],
         opacity: optionOpacityAnimation.value
     }), [])
@@ -206,9 +206,11 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef, onQRCode }) => {
                         onPress={IsAddedInCollection ? removeFromCollectionHandle : AddToCollection}
                     />
                 </MainOptions>
-                <AnimatedOption iconName="image" onPress={copyImageLink} animation={styleAnimationOptionFromBottom}>Link da foto</AnimatedOption>
-                <AnimatedOption iconName="share" onPress={share} animation={styleAnimationOptionFromBottom}>Compartilhar</AnimatedOption>
-                <AnimatedOption iconName="qr-code-scanner" onPress={onQRCode} animation={styleAnimationOptionFromBottom}>Gerar QRCode</AnimatedOption>
+                <Options style={styleAnimationOptionsFromBottom}>
+                    <AnimatedOption iconName="image" onPress={copyImageLink}>Link da foto</AnimatedOption>
+                    <AnimatedOption iconName="share" onPress={share}>Compartilhar</AnimatedOption>
+                    <AnimatedOption iconName="qr-code-scanner" onPress={onQRCode}>Gerar QRCode</AnimatedOption>
+                </Options>
             </Container>
         )
     } else {

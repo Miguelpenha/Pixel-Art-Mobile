@@ -5,16 +5,8 @@ import { Modalize } from 'react-native-modalize'
 import { Ipixel } from '../../types'
 import { TextInput, ListRenderItemInfo, Platform } from 'react-native'
 import uuid from 'react-native-uuid'
-import HeaderBack from '../../components/HeaderBack'
 import {
     Arts,
-    Title,
-    Options,
-    ButtonColorSelectInfo,
-    ButtonClear,
-    IconClear,
-    ColorSelectInfo,
-    TextColorSelectInfo,
     ContainerMutateNumber,
     TitleMutateNumber,
     DataMutateNumber,
@@ -29,7 +21,6 @@ import {
     ContainerColorPicker,
     ButtonSubmitColor,
     TextButtonSubmitColor,
-    NameArt,
     Loading
 } from './style'
 import Toast from 'react-native-toast-message'
@@ -39,8 +30,9 @@ import api from '../../api'
 import { IArt } from '../../types'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ColorPicker from 'react-native-wheel-color-picker'
-import { blue, green, magenta } from '../../utils/colorsLogs'
+import { blue, magenta } from '../../utils/colorsLogs'
 import limitText from '../../utils/limitText'
+import Header from './Header'
 
 function CreateArt() {
     const navigation = useNavigation()
@@ -69,38 +61,26 @@ function CreateArt() {
 
     useEffect(() => makePixels(), [pixelsCount])
 
-    function Header() {
-        return <>
-            <HeaderBack onClick={() => navigation.goBack()}/>
-            <Title>Criar arte</Title>
-            <NameArt ref={nameRef} autoCapitalize="sentences" autoCompleteType="username" defaultValue={name} onChangeText={setName} autoCorrect selectionColor={theme.primary} placeholder="Nome da arte..." placeholderTextColor={theme.secondaryColor}/>
-            <Options>
-                <ButtonColorSelectInfo onPress={() => modalColorPicker.current.open()}>
-                    <ColorSelectInfo color={colorSelect}/>
-                    <TextColorSelectInfo>Mudar cor</TextColorSelectInfo>
-                </ButtonColorSelectInfo>
-                <ButtonClear onPress={() => {
-                    makePixels()
-                    
-                    Toast.show({
-                        type: 'info',
-                        text1: 'Arte limpa'
-                    })
-                }}>
-                    <IconClear name="cached" size={30}/>
-                </ButtonClear>
-            </Options>
-        </>
+    function HeaderFunction() {
+        return (
+            <Header
+                name={name}
+                nameRef={nameRef}
+                setName={setName}
+                clear={makePixels}
+                colorSelect={colorSelect}
+                modalColorPicker={modalColorPicker}
+            />
+        )
     }
     
     return (
         <ContainerPd>
             <Arts
-                ListHeaderComponent={Header()}
-                ListHeaderComponentStyle={{width: '100%'}}
                 data={pixels}
                 key={Math.sqrt(pixelsCount)}
                 numColumns={Math.sqrt(pixelsCount)}
+                ListHeaderComponent={HeaderFunction()}
                 contentContainerStyle={{alignItems: 'center'}}
                 renderItem={({ item }: ListRenderItemInfo<Ipixel>) => (
                     <Pixel pixels={pixels} setPixels={setPixels} pixel={item} pixelsCount={pixelsCount} colorSelect={colorSelect}/>

@@ -5,7 +5,7 @@ import { memo, useEffect } from 'react'
 
 function Header() {
     const navigation = useNavigation()
-    const pressed = useSharedValue(0.5)
+    const pressed = useSharedValue(1)
     const show = useSharedValue(0.4)
     const showScale = useSharedValue(0.6)
 
@@ -20,7 +20,6 @@ function Header() {
 
     useEffect(() => {
         setTimeout(() => {
-            pressed.value = withTiming(1)
             show.value = withTiming(1)
             showScale.value = withTiming(1)
         }, 500)

@@ -4,7 +4,7 @@ import { ViewStyle } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import Animated from 'react-native-reanimated'
 
-export const Option = styled.TouchableOpacity`
+export const Container = styled.TouchableOpacity`
     padding: 4%;
     margin-top: 8%;
     align-self: center;
