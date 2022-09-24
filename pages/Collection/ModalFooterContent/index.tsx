@@ -19,11 +19,11 @@ const ModalFooterContent: FC<Iprops> = ({ art }) => {
 
     useEffect(() => {
         fromBottomAnimation.value = withTiming(0, {
-            duration: 800
+            duration: 700
         })
 
         opacityAnimation.value = withTiming(1, {
-            duration: 800
+            duration: 700
         })
     }, [])
 

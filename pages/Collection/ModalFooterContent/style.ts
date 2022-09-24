@@ -7,11 +7,11 @@ export const Container = styled(Animated.View)`
     padding-bottom: 14%;
 `
 
-export const ContainerInfo = styled.View`
-    width: 100%;
+export const ContainerInfo = styled.TouchableOpacity`
     margin-top: 2%;
     flex-wrap: wrap;
     flex-direction: row;
+    align-self: flex-start;
 `
 
 export const LabelInfo = styled.Text`

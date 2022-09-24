@@ -29,11 +29,11 @@ export default function Home() {
   const pressedIcon = useSharedValue(1)
   
   useEffect(() => {
-    mutateArts()
+    mutateArts().then()
   }, [])
 
   useFocusEffect(() => {
-    mutateArts()
+    mutateArts().then()
   })
 
   function RenderArt({ item }: ListRenderItemInfo<IArt>) {
@@ -55,7 +55,7 @@ export default function Home() {
   async function onRefreshAction() {
     setRefreshing(true)
 
-    mutateArts()
+    mutateArts().then()
 
     setRefreshing(false)
   }
@@ -130,7 +130,7 @@ export default function Home() {
             />
           )}
         />
-        <Modalize {...optionsModalize(theme, 60, 20)} ref={modalFooter}>
+        <Modalize {...optionsModalize(theme, 60, 25)} ref={modalFooter}>
           <ModalFooterContent art={artSelect}/>
         </Modalize>
         <Modalize {...optionsModalize(theme, 90, 60)} ref={modalMore}>

@@ -35,7 +35,7 @@ export default function Collection() {
   const refArts = useRef<FlatList>(null)
 
   useEffect(() => {
-    mutateArts()
+    mutateArts().then()
   }, [])
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Collection() {
   }, [arts, scrollTo])
 
   useFocusEffect(() => {
-    mutateArts()
+    mutateArts().then()
   })
 
   function RenderArt({ item }: ListRenderItemInfo<IArt>) {
@@ -78,7 +78,7 @@ export default function Collection() {
   async function onRefreshAction() {
     setRefreshing(true)
 
-    mutateArts()
+    mutateArts().then()
     
     setRefreshing(false)
   }
@@ -106,7 +106,7 @@ export default function Collection() {
             />
           )}
         />
-        <Modalize {...optionsModalize(theme, 60, 20)} ref={modalFooter}>
+        <Modalize {...optionsModalize(theme, 60, 25)} ref={modalFooter}>
           <ModalFooterContent art={artSelect}/>
         </Modalize>
         <Modalize {...optionsModalize(theme, 90, 60)} ref={modalMore}>

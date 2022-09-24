@@ -83,7 +83,14 @@ function CreateArt() {
                 ListHeaderComponent={HeaderFunction()}
                 contentContainerStyle={{alignItems: 'center'}}
                 renderItem={({ item }: ListRenderItemInfo<Ipixel>) => (
-                    <Pixel pixels={pixels} setPixels={setPixels} pixel={item} pixelsCount={pixelsCount} colorSelect={colorSelect}/>
+                    <Pixel
+                        pixel={item}
+                        pixels={pixels}
+                        setPixels={setPixels}
+                        pixelsCount={pixelsCount}
+                        colorSelect={colorSelect}
+                        loadingCreate={loadingCreate}
+                    />
                 )}
                 keyExtractor={(item: Ipixel) => item.id}
                 ListFooterComponent={() => <>

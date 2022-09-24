@@ -7,8 +7,8 @@ export const MessageNotFound = styled.Text`
     font-weight: bold;
     align-self: center;
     text-align: center;
-    font-size: ${RFPercentage(4)}px;
-    line-height: ${RFPercentage(5.5)}px;
+    font-size: ${RFPercentage(4.5)}px;
+    line-height: ${RFPercentage(6)}px;
     color: ${props => props.theme.primary};
 `
 
