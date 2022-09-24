@@ -130,7 +130,7 @@ export default function Home() {
             />
           )}
         />
-        <Modalize {...optionsModalize(theme, 50, 20)} ref={modalFooter}>
+        <Modalize {...optionsModalize(theme, 60, 20)} ref={modalFooter}>
           <ModalFooterContent art={artSelect}/>
         </Modalize>
         <Modalize {...optionsModalize(theme, 90, 60)} ref={modalMore}>

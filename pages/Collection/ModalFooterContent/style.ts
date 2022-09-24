@@ -4,7 +4,7 @@ import { RFPercentage } from 'react-native-responsive-fontsize'
 
 export const Container = styled(Animated.View)`
     padding: 4%;
-    padding-bottom: 20%;
+    padding-bottom: 14%;
 `
 
 export const ContainerInfo = styled.View`
