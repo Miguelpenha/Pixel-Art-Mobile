@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated'
 export const Container = styled.View`
     padding: 4%;
     padding-top: 6%;
-    padding-bottom: ${RFPercentage(42.8)}px;
+    padding-bottom: ${RFPercentage(40)}px;
 `
 
 export const MainOptions = styled(Animated.View)`

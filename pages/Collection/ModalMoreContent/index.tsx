@@ -165,6 +165,26 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef, onQRCode }) => {
         })
     }
 
+    async function getColors() {
+        let colors = ''
+
+        art.colors.map((color, index) => colors = `${colors}${color}${index+1 != art.colors.length ? ', ' : ''}`)
+
+        Clipboard.setString(colors)
+        
+        modalRef.current.close()
+        
+        console.log(blue('>> Copied pixel art colors'))
+        console.log(magenta(`   >> ID: ${art._id}`))
+        console.log(magenta(`   >> Name: ${art.name}`))
+        console.log(magenta(`   >> Colors: ${art.colors}`))
+
+        Toast.show({
+            type: 'info',
+            text1: 'Cores copiado para a sua área de transferência'
+        })
+    }
+
     const styleAnimationMainOptions = useAnimatedStyle(() => ({
         borderBottomWidth: borderWidthAnimation.value
     }), [])
@@ -210,6 +230,7 @@ const ModalMoreContent: FC<Iprops> = ({ art, modalRef, onQRCode }) => {
                     <AnimatedOption iconName="image" onPress={copyImageLink}>Link da foto</AnimatedOption>
                     <AnimatedOption iconName="share" onPress={share}>Compartilhar</AnimatedOption>
                     <AnimatedOption iconName="qr-code-scanner" onPress={onQRCode}>Gerar QRCode</AnimatedOption>
+                    <AnimatedOption iconName="color-lens" onPress={getColors}>Pegar cores</AnimatedOption>
                 </Options>
             </Container>
         )
