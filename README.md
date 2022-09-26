@@ -1,2 +1,2 @@
-# Exercise-App
- Exercise App
+# Pixel Art Mobile
+ Pixel Art para mobile

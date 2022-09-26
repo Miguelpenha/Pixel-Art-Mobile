@@ -28,6 +28,7 @@ export const Options = styled.View`
     margin-bottom: 4%;
     align-self: center;
     flex-direction: row;
+    align-items: center;
 `
 
 export const ButtonColor = styled.TouchableOpacity`
@@ -59,7 +60,9 @@ export const TextButtonColor = styled.Text`
 `
 
 export const ButtonClear = styled.TouchableOpacity`
-    padding: 2%;
+    padding: 8%;
+    margin-left: -12%;
+    align-self: center;
     border-radius: ${RFPercentage(5)}px;
     background-color: ${props => props.theme.primary};
 `

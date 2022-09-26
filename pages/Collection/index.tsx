@@ -109,7 +109,7 @@ export default function Collection() {
         <Modalize {...optionsModalize(theme, 60, 25)} ref={modalFooter}>
           <ModalFooterContent art={artSelect}/>
         </Modalize>
-        <Modalize {...optionsModalize(theme, 90, 60)} ref={modalMore}>
+        <Modalize {...optionsModalize(theme, 90, 64)} ref={modalMore}>
           <ModalMoreContent art={artSelect} modalRef={modalMore} onQRCode={() => {
             modalQRCode.current.open()
             modalMore.current.close()
